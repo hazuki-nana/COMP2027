@@ -33,7 +33,7 @@ abstract class AbstractAircraft
     + decreaseHp(int decrease):void
     + getHp():int
     + {abstract} shoot():List<BaseBullet>
-    + {abstract} 
+    + {abstract} drop() :List<AbstractSupport>
  }
 
 
@@ -44,6 +44,7 @@ class HeroAircraft {
     + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
 }
 
 AbstractAircraft <|-- HeroAircraft
@@ -52,8 +53,20 @@ class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
 }
 AbstractAircraft <|-- MobEnemy
+
+class EliteEnemy {
+    - shootNum:int
+    - power:int
+    - direction:int
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractAircraft <|-- EliteEnemy
 
 abstract class BaseBullet
 {
@@ -79,4 +92,29 @@ BaseBullet <|-- EnemyBullet
 AbstractFlyingObject <|-- AbstractAircraft
 AbstractFlyingObject <|-- BaseBullet
 
+abstract AbstractSupport {
+    + AbstractSupport(int locationX, int locationY, int speedX, int speedY)
+    + forward(): void
+    + {abstract} Effect:void
+}
+
+class Bomb {
+    +Bomb(int locationX, int locationY, int speedX, int speedY)
+    +Effect(HeroAircraft heroAircraft):void
+}
+
+class Fire {
+    +Fire(int locationX, int locationY, int speedX, int speedY)
+    +Effect(HeroAircraft heroAircraft):void
+}
+
+class Heal {
+    +Heal(int locationX, int locationY, int speedX, int speedY)
+    +Effect(HeroAircraft heroAircraft):void
+}
+
+AbstractSupport <|-- Bomb
+AbstractSupport <|-- Fire
+AbstractSupport <|-- Heal
+AbstractFlyingObject <|-- AbstractSupport
 @enduml
