@@ -2,6 +2,7 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.bullet.HeroBullet;
+import edu.hitsz.support.AbstractSupport;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 子弹一次发射数量
      */
-    private int shootNum = 1;
+    private int shootNum = 2;
 
     /**
      * 子弹伤害
@@ -66,4 +67,29 @@ public class HeroAircraft extends AbstractAircraft {
         return res;
     }
 
+    /**
+     * 道具：回复血量
+     */
+    public void increaseHp(int hp){
+        if (this.hp< maxHp) {
+            this.hp += hp;
+            this.hp %= maxHp;
+        }
+    }
+
+    /**
+     * 道具：火力增加
+     */
+    public void increaseFire(){
+        System.out.println("Fire support active!");
+    }
+
+    /**
+     * 道具：清屏
+     */
+    public void Explode(){
+        System.out.println("Bomb support active!");
+    }
+
+    public List<AbstractSupport> Drop(){return new LinkedList<>();};
 }
