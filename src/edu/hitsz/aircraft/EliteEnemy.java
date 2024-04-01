@@ -78,15 +78,19 @@ public class EliteEnemy extends AbstractAircraft {
     public List<AbstractSupport> Drop(){
         int x = this.getLocationX();
         int y = this.getLocationY() + direction*2;
-        int speedX = 0;
+        int speedX = direction*2;
         int speedY = direction*2;
         List<AbstractSupport> res = new LinkedList<>();
-        AbstractSupport support;
-        if (Math.random() < 0.4)
-            support = new Heal(x, y, speedX, speedY);
-        else
-            support = new Fire(x, y, speedX, speedY);
-        res.add(support);
+        if (Math.random()< 0.6) {
+            AbstractSupport support;
+            if (Math.random() < 0.4)
+                support = new Heal(x, y, speedX, speedY);
+            else if (Math.random() < 0.6)
+                support = new Bomb(x, y, speedX, speedY);
+            else
+                support = new Fire(x, y, speedX, speedY);
+            res.add(support);
+        }
         return res;
     }
 

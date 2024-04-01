@@ -33,6 +33,7 @@ abstract class AbstractAircraft
     + decreaseHp(int decrease):void
     + getHp():int
     + {abstract} shoot():List<BaseBullet>
+    + {abstract} 
  }
 
 
