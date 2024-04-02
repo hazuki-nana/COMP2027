@@ -80,8 +80,8 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 道具：火力增加
      */
-    public void increaseFire(){
-        System.out.println("Fire support active!");
+    public void increaseFire(int increase){
+        shootNum += increase;
     }
 
     /**

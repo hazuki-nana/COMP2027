@@ -67,7 +67,6 @@ class EliteEnemy {
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
-    + drop() :List<AbstractSupport>
 }
 AbstractAircraft <|-- EliteEnemy
 
