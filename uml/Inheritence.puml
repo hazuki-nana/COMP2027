@@ -45,6 +45,9 @@ class HeroAircraft {
     + forward():void
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
+    + increaseHp(int hp):void
+    + increaseFire():void
+    + Explode():void
 }
 
 AbstractAircraft <|-- HeroAircraft
@@ -95,7 +98,7 @@ AbstractFlyingObject <|-- BaseBullet
 abstract AbstractSupport {
     + AbstractSupport(int locationX, int locationY, int speedX, int speedY)
     + forward(): void
-    + {abstract} Effect:void
+    + {abstract} Effect(HeroAircraft heroAircraft):void
 }
 
 class Bomb {

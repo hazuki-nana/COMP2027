@@ -38,7 +38,7 @@ public class Game extends JPanel {
     private final List<AbstractAircraft> enemyAircrafts;
     private final List<BaseBullet> heroBullets;
     private final List<BaseBullet> enemyBullets;
-    private List<AbstractSupport> supports;
+    private final List<AbstractSupport> supports;
 
     /**
      * 屏幕中出现的敌机最大数量
@@ -251,6 +251,8 @@ public class Game extends JPanel {
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
+                        if (enemyAircraft.getClass() == EliteEnemy.class)
+                            score +=30;
                         score += 10;
                         supports.addAll(enemyAircraft.Drop());
                     }
