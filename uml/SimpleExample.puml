@@ -11,7 +11,7 @@ class HeroAircraft {
     + increaseHp(int hp):void
     + increaseFire():void
     + Explode():void
-    + {static}getHero(int locationX, int locationY, int speedX, int speedY, int hp):heroAircraft
+    + {static}getHeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp):heroAircraft
 }
 HeroAircraft <|-- HeroAircraft
 
