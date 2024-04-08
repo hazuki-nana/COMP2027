@@ -38,18 +38,20 @@ abstract class AbstractAircraft
 
 
 class HeroAircraft {
+    - {static}HeroAircraft heroAircraft
     - shootNum:int
     - power:int
     - direction:int
-    + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
     + increaseHp(int hp):void
     + increaseFire():void
     + Explode():void
+    + {static}getHero(int locationX, int locationY, int speedX, int speedY, int hp):HeroAircraft
 }
-
+HeroAircraft <|-- HeroAircraft
 AbstractAircraft <|-- HeroAircraft
 
 class MobEnemy {
@@ -67,7 +69,6 @@ class EliteEnemy {
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
-    + drop() :List<AbstractSupport>
 }
 AbstractAircraft <|-- EliteEnemy
 
@@ -120,4 +121,6 @@ AbstractSupport <|-- Bomb
 AbstractSupport <|-- Fire
 AbstractSupport <|-- Heal
 AbstractFlyingObject <|-- AbstractSupport
+
+
 @enduml

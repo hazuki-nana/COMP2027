@@ -1,0 +1,18 @@
+@startuml
+class HeroAircraft {
+    - {static}HeroAircraft heroAircraft
+    - shootNum:int
+    - power:int
+    - direction:int
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+    + increaseHp(int hp):void
+    + increaseFire():void
+    + Explode():void
+    + {static}getHero(int locationX, int locationY, int speedX, int speedY, int hp):heroAircraft
+}
+HeroAircraft <|-- HeroAircraft
+
+@enduml

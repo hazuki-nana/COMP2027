@@ -3,6 +3,10 @@ package edu.hitsz.aircraft;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.bullet.EnemyBullet;
+import edu.hitsz.propFac.BombFactory;
+import edu.hitsz.propFac.FireFactory;
+import edu.hitsz.propFac.HealFactory;
+import edu.hitsz.propFac.SupportFactory;
 import edu.hitsz.support.AbstractSupport;
 import edu.hitsz.support.Bomb;
 import edu.hitsz.support.Fire;
@@ -82,14 +86,14 @@ public class EliteEnemy extends AbstractAircraft {
         int speedY = direction*2;
         List<AbstractSupport> res = new LinkedList<>();
         if (Math.random()< 0.6) {
-            AbstractSupport support;
+            SupportFactory support;
             if (Math.random() < 0.4)
-                support = new Heal(x, y, speedX, speedY);
+                support = new HealFactory();
             else if (Math.random() < 0.6)
-                support = new Bomb(x, y, speedX, speedY);
+                support = new BombFactory();
             else
-                support = new Fire(x, y, speedX, speedY);
-            res.add(support);
+                support = new FireFactory();
+            res.add(support.CreatSupport(x, y, speedX, speedY));
         }
         return res;
     }

@@ -31,13 +31,17 @@ public class HeroAircraft extends AbstractAircraft {
     private int direction = -1;
 
     /**
+     *构造单例
+     */
+    private volatile static HeroAircraft heroAircraft;
+    /**
      * @param locationX 英雄机位置x坐标
      * @param locationY 英雄机位置y坐标
      * @param speedX 英雄机射出的子弹的基准速度（英雄机无特定速度）
      * @param speedY 英雄机射出的子弹的基准速度（英雄机无特定速度）
      * @param hp    初始生命值
      */
-    public HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
+    private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
     }
 
@@ -71,10 +75,9 @@ public class HeroAircraft extends AbstractAircraft {
      * 道具：回复血量
      */
     public void increaseHp(int hp){
-        if (this.hp< maxHp) {
-            this.hp += hp;
-            this.hp %= maxHp;
-        }
+        this.hp += hp;
+        if (this.hp>maxHp)
+            this.hp=maxHp;
     }
 
     /**
@@ -92,4 +95,15 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     public List<AbstractSupport> Drop(){return new LinkedList<>();};
+
+    public static HeroAircraft getHeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
+        if (heroAircraft == null){
+            synchronized (HeroAircraft.class){
+                if (heroAircraft == null) {
+                heroAircraft = new HeroAircraft(locationX, locationY, speedX, speedY, hp);
+                }
+            }
+        }
+        return heroAircraft;
+    }
 }

@@ -1,11 +1,12 @@
 package edu.hitsz.application;
 
 import edu.hitsz.aircraft.*;
+import edu.hitsz.airFac.EliteFactory;
+import edu.hitsz.airFac.EnemyFactory;
+import edu.hitsz.airFac.MobFactory;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.support.AbstractSupport;
-import edu.hitsz.support.Fire;
-import edu.hitsz.support.Heal;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import javax.swing.*;
@@ -39,7 +40,7 @@ public class Game extends JPanel {
     private final List<BaseBullet> heroBullets;
     private final List<BaseBullet> enemyBullets;
     private final List<AbstractSupport> supports;
-
+    private EnemyFactory enemyFactory;
     /**
      * 屏幕中出现的敌机最大数量
      */
@@ -67,7 +68,7 @@ public class Game extends JPanel {
     private boolean gameOverFlag = false;
 
     public Game() {
-        heroAircraft = new HeroAircraft(
+        heroAircraft = HeroAircraft.getHeroAircraft(
                 Main.WINDOW_WIDTH / 2,
                 Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
                 0, 0, 100);
@@ -107,23 +108,11 @@ public class Game extends JPanel {
                 // 新敌机产生
 
                 if (enemyAircrafts.size() < enemyMaxNumber) {
-                    enemyAircrafts.add(new MobEnemy(
-                            (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth())),
-                            (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
-                            0,
-                            10,
-                            30
-                    ));
-                    if (Math.random()<0.25)
-                        enemyAircrafts.add(new EliteEnemy(
-                                (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())),
-                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
-                                0,
-                                5,
-                                40
-                        ));
+                    if(Math.random()<0.7)
+                        enemyFactory = new MobFactory();
+                    else enemyFactory = new EliteFactory();
+                    enemyAircrafts.add(enemyFactory.CreatEnemy());
                 }
-
 
                 // 飞机射出子弹
                 shootAction();
