@@ -13,6 +13,6 @@ class HeroAircraft {
     + Explode():void
     + {static}getHeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp):heroAircraft
 }
-HeroAircraft <|-- HeroAircraft
+HeroAircraft <-- HeroAircraft
 
 @enduml

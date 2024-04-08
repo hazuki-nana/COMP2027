@@ -92,5 +92,5 @@ class game{}
 game ..> AbstractAircraft
 game ..> EnemyFactory
 game ..> AbstractSupport
-game ..> SupportFactory
+EliteEnemy ..> SupportFactory
 @enduml
