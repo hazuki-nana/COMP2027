@@ -8,7 +8,7 @@ public class Fire extends AbstractSupport {
         super(locationX, locationY, speedX, speedY);
     }
     public void Effect(HeroAircraft heroAircraft){
-        heroAircraft.increaseFire();
+        heroAircraft.increaseFire(1);
     }
 
 }
