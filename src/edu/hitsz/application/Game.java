@@ -1,9 +1,7 @@
 package edu.hitsz.application;
 
+import edu.hitsz.airFac.*;
 import edu.hitsz.aircraft.*;
-import edu.hitsz.airFac.EliteFactory;
-import edu.hitsz.airFac.EnemyFactory;
-import edu.hitsz.airFac.MobFactory;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.support.AbstractSupport;
@@ -68,11 +66,7 @@ public class Game extends JPanel {
     private boolean gameOverFlag = false;
 
     public Game() {
-        heroAircraft = HeroAircraft.getHeroAircraft(
-                Main.WINDOW_WIDTH / 2,
-                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                0, 0, 100);
-
+        heroAircraft = HeroAircraft.getHeroAircraft();
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
@@ -107,12 +101,18 @@ public class Game extends JPanel {
                 System.out.println(time);
                 // 新敌机产生
 
+
+
                 if (enemyAircrafts.size() < enemyMaxNumber) {
-                    if(Math.random()<0.7)
+                    if(Math.random()<0.6)
                         enemyFactory = new MobFactory();
-                    else enemyFactory = new EliteFactory();
+                    else if (Math.random()<0.85)
+                        enemyFactory = new BossFactory();
+                    else enemyFactory = new PlusFactory();
                     enemyAircrafts.add(enemyFactory.CreatEnemy());
                 }
+
+
 
                 // 飞机射出子弹
                 shootAction();
@@ -241,7 +241,9 @@ public class Game extends JPanel {
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
                         if (enemyAircraft.getClass() == EliteEnemy.class)
-                            score +=30;
+                            score +=10;
+                        else if (enemyAircraft instanceof PlusEnemy)
+                            score +=20;
                         score += 10;
                         supports.addAll(enemyAircraft.Drop());
                     }

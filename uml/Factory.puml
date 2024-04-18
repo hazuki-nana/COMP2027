@@ -1,4 +1,4 @@
-@startuml
+ @startuml
 'https://plantuml.com/sequence-diagram
 
 abstract AbstractSupport {
@@ -53,6 +53,14 @@ class MobEnemy {
 }
 AbstractAircraft <|-- MobEnemy
 
+class PlusEnemy{
+    + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractAircraft <|-- PlusEnemy
+
 class EliteEnemy {
     - shootNum:int
     - power:int
@@ -62,6 +70,14 @@ class EliteEnemy {
     + shoot():List<BaseBullet>
 }
 AbstractAircraft <|-- EliteEnemy
+
+class BossEnemy{
+    + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractAircraft <|-- BossEnemy
 
 abstract class AbstractAircraft
 {
@@ -83,10 +99,24 @@ class EliteFactory {
 class MobFactory {
     +CreatEnemy():AbstractAircraft;
 }
+class PlusFactory{
+    -direction():int
+    +CreatEnemy():AbstractAircraft;
+}
+class BossFactory{
+    -direction():int
+    +CreatEnemy():AbstractSupport;
+}
 MobEnemy <.. MobFactory
 EliteEnemy <.. EliteFactory
 EnemyFactory <|-- EliteFactory
 EnemyFactory <|-- MobFactory
+EnemyFactory <|-- PlusFactory
+PlusEnemy <.. PlusFactory
+EnemyFactory <|-- BossFactory
+BossEnemy <.. BossFactory
+
+
 
 class game{}
 game ..> AbstractAircraft

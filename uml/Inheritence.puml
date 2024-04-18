@@ -19,6 +19,7 @@ abstract class AbstractFlyingObject
     + getLocationX():int
     + getLocationY():int
     + getSpeedY():int
+    + getSpeedX():int
     + getImage():BufferedImage
     + getWidth():int
     + getHeight():int
@@ -49,7 +50,7 @@ class HeroAircraft {
     + increaseHp(int hp):void
     + increaseFire():void
     + Explode():void
-    + {static}getHero(int locationX, int locationY, int speedX, int speedY, int hp):HeroAircraft
+    + {static}getHero():HeroAircraft
 }
 HeroAircraft <|-- HeroAircraft
 AbstractAircraft <|-- HeroAircraft
@@ -62,6 +63,17 @@ class MobEnemy {
 }
 AbstractAircraft <|-- MobEnemy
 
+class PlusEnemy{
+    - shootNum:int
+    - power:int
+    - direction:int
+    + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractAircraft <|-- PlusEnemy
+
 class EliteEnemy {
     - shootNum:int
     - power:int
@@ -69,8 +81,20 @@ class EliteEnemy {
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
 }
 AbstractAircraft <|-- EliteEnemy
+
+class BossEnemy{
+    - shootNum:int
+    - power:int
+    - direction:int
+    + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractAircraft <|-- BossEnemy
 
 abstract class BaseBullet
 {
