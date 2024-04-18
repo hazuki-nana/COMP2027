@@ -16,7 +16,7 @@ public class BossFactory extends EnemyFactory{
                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
                 3 * direction(),
                 0,
-                300
+                500
         );
     }
 }

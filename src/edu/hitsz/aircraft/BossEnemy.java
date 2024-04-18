@@ -12,6 +12,8 @@ import edu.hitsz.support.Bomb;
 import edu.hitsz.support.Fire;
 import edu.hitsz.support.Heal;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,14 +67,13 @@ public class BossEnemy extends AbstractAircraft {
     public List<BaseBullet> shoot() {
 
         double a = (double) 360 / shootNum ;
-        List<BaseBullet> res = new LinkedList<>();
         int x = this.getLocationX();
         int y = this.getLocationY() + direction * 2;
         int[] speedX = new int[shootNum];
         int[] speedY = new int[shootNum];
         for (int i = 0; i < shootNum; i++) {
             double angle = Math.toRadians(a * (i)); // 将角度转换为弧度
-            speedX[i] = (int) (Math.sin(angle) * 1000);
+            speedX[i] = (int) (Math.sin(angle) * 20);
             speedY[i] = (int) (Math.cos(angle) * 10);
         }
         BaseBullet[] bullet = new BaseBullet[shootNum];
@@ -81,29 +82,29 @@ public class BossEnemy extends AbstractAircraft {
             // 多个子弹横向分散
             bullet[i] = new EnemyBullet(x, y, speedX[i], speedY[i], power);
         }
-        res.addAll(List.of(bullet));
-        return res;
+        return new LinkedList<>(List.of(bullet));
     }
 //    public List<BaseBullet> shoot(){return new LinkedList<>();}
     public List<AbstractSupport> Drop(){
         int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
+        int y = this.getLocationY();
         int speedX = direction*2;
-        int speedY = direction*2;
+        int speedY = direction*4;
         SupportFactory support;
-        AbstractSupport[] slist = new AbstractSupport[3];
-        for (int i = 0; i < 3; i++){
-            if (Math.random()< 0.6) {
-                if (Math.random() < 0.4)
-                    support = new HealFactory();
-                else if (Math.random() < 0.6)
-                    support = new BombFactory();
-                else
-                    support = new FireFactory();
-                slist[i] = support.CreatSupport(x, y, speedX, speedY);
-            }
+        int propnum = (int)(Math.random() * 3);
+        AbstractSupport[] slist = new AbstractSupport[propnum];
+        for (int i = 0; i < propnum; i++){
+            if (Math.random() < 0.4)
+                support = new HealFactory();
+            else if (Math.random() < 0.6)
+                support = new BombFactory();
+            else
+                support = new FireFactory();
+            slist[i] = support.CreatSupport(x + (i*2 - propnum + 1)*10, y, speedX, speedY);
+            System.out.println(Arrays.toString(slist));
         }
         return new LinkedList<>(List.of(slist));
     }
+//public List<AbstractSupport> Drop(){ return new ArrayList<>();}
 
 }
