@@ -44,6 +44,7 @@ class HeroAircraft {
     - power:int
     - direction:int
     - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    - isHero:boolean
     + forward():void
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
@@ -55,13 +56,21 @@ class HeroAircraft {
 HeroAircraft <|-- HeroAircraft
 AbstractAircraft <|-- HeroAircraft
 
+abstract class AbstractEnemy
+{
+    #isHero:boolean
+    +AbstractEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    +{abstract}shoot():List<BaseBullet>
+    +{abstract}Drop():List<AbstractSupport>
+}
+AbstractAircraft <|-- AbstractEnemy
 class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- MobEnemy
+AbstractEnemy <|-- MobEnemy
 
 class PlusEnemy{
     - shootNum:int
@@ -72,7 +81,7 @@ class PlusEnemy{
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- PlusEnemy
+AbstractEnemy <|-- PlusEnemy
 
 class EliteEnemy {
     - shootNum:int
@@ -83,7 +92,7 @@ class EliteEnemy {
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- EliteEnemy
+AbstractEnemy <|-- EliteEnemy
 
 class BossEnemy{
     - shootNum:int
@@ -94,7 +103,7 @@ class BossEnemy{
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- BossEnemy
+AbstractEnemy <|-- BossEnemy
 
 abstract class BaseBullet
 {
@@ -140,10 +149,16 @@ class Heal {
     +Heal(int locationX, int locationY, int speedX, int speedY)
     +Effect(HeroAircraft heroAircraft):void
 }
+class PlusFire
+{
+    +plusFire(int locationX, int locationY, int speedX, int speedY)
+    +Effect(HeroAircraft heroAircraft):void
+}
 
 AbstractSupport <|-- Bomb
 AbstractSupport <|-- Fire
 AbstractSupport <|-- Heal
+AbstractSupport <|-- PlusFire
 AbstractFlyingObject <|-- AbstractSupport
 
 

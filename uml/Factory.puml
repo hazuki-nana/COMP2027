@@ -21,9 +21,15 @@ class Heal {
     +Heal(int locationX, int locationY, int speedX, int speedY)
     +Effect(HeroAircraft heroAircraft):void
 }
+class PlusFire
+{
+    +plusFire(int locationX, int locationY, int speedX, int speedY)
+    +Effect(HeroAircraft heroAircraft):void
+}
 AbstractSupport <|-- Bomb
 AbstractSupport <|-- Fire
 AbstractSupport <|-- Heal
+AbstractSupport <|-- PlusFire
 
 abstract class SupportFactory {
     +{abstract}CreatSupport(int locationX, int locationY, int speedX, int speedY):AbstractSupport;
@@ -38,12 +44,19 @@ class FireFactory {
 class HealFactory {
     +CreatSupport(int locationX, int locationY, int speedX, int speedY):AbstractSupport;
 }
+
+class PlusFireFactory
+{
+    +CreatSupport(int locationX, int locationY, int speedX, int speedY):AbstractSupport;
+}
 HealFactory ..> Heal
 BombFactory ..> Bomb
 FireFactory ..> Fire
+PlusFireFactory ..> PlusFire
 SupportFactory <|-- BombFactory
 SupportFactory <|-- FireFactory
 SupportFactory <|-- HealFactory
+SupportFactory <|-- PlusFireFactory
 
 class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)

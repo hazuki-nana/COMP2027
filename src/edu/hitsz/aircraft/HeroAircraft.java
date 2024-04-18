@@ -1,5 +1,9 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.BulletTrajectory.AbstractTrajectory;
+import edu.hitsz.BulletTrajectory.Circle;
+import edu.hitsz.BulletTrajectory.Direct;
+import edu.hitsz.BulletTrajectory.Scatter;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
@@ -32,6 +36,8 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private int direction = -1;
 
+    private boolean isHero = true;
+
     /**
      *构造单例
      */
@@ -45,6 +51,7 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
+        setAbstractTrajectory(new Direct());
     }
 
     @Override
@@ -57,21 +64,26 @@ public class HeroAircraft extends AbstractAircraft {
      * 通过射击产生子弹
      * @return 射击出的子弹List
      */
-    public List<BaseBullet> shoot() {
-        List<BaseBullet> res = new LinkedList<>();
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int speedX = 0;
-        int speedY = this.getSpeedY() + direction*5;
-        BaseBullet bullet;
-        for(int i=0; i<shootNum; i++){
-            // 子弹发射位置相对飞机位置向前偏移
-            // 多个子弹横向分散
-            bullet = new HeroBullet(x + (i*2 - shootNum + 1)*10, y, speedX, speedY, power);
-            res.add(bullet);
-        }
-        return res;
+    public List<BaseBullet> shoot()
+    {
+        return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
+                this.shootNum, this.power, this.getSpeedY() + direction*10, isHero);
     }
+//    public List<BaseBullet> shoot() {
+//        List<BaseBullet> res = new LinkedList<>();
+//        int x = this.getLocationX();
+//        int y = this.getLocationY() + direction*2;
+//        int speedX = 0;
+//        int speedY = this.getSpeedY() + direction*5;
+//        BaseBullet bullet;
+//        for(int i=0; i<shootNum; i++){
+//            // 子弹发射位置相对飞机位置向前偏移
+//            // 多个子弹横向分散
+//            bullet = new HeroBullet(x + (i*2 - shootNum + 1)*10, y, speedX, speedY, power);
+//            res.add(bullet);
+//        }
+//        return res;
+//    }
 
     /**
      * 道具：回复血量
@@ -85,10 +97,17 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 道具：火力增加
      */
-    public void increaseFire(int increase){
-        shootNum += increase;
+    public void increaseFire(){
+        this.shootNum = 3;
+        setAbstractTrajectory(new Scatter());
     }
-
+    /**
+     * 道具：超级火力增加
+     */
+    public void increasePlusFire(){
+        this.shootNum = 20;
+        setAbstractTrajectory(new Circle());
+    }
     /**
      * 道具：清屏
      */
@@ -105,7 +124,7 @@ public class HeroAircraft extends AbstractAircraft {
                 heroAircraft = new HeroAircraft(
                         Main.WINDOW_WIDTH / 2,
                         Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                        0, 0, 100);
+                        0, 0, 200);
                 }
             }
         }

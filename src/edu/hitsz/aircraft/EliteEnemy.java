@@ -1,16 +1,13 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.BulletTrajectory.Direct;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.propFac.BombFactory;
 import edu.hitsz.propFac.FireFactory;
 import edu.hitsz.propFac.HealFactory;
 import edu.hitsz.propFac.SupportFactory;
 import edu.hitsz.support.AbstractSupport;
-import edu.hitsz.support.Bomb;
-import edu.hitsz.support.Fire;
-import edu.hitsz.support.Heal;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
  * 精英飞机，定时射击子弹
  * @author hitsz
  */
-public class EliteEnemy extends AbstractAircraft {
+public class EliteEnemy extends AbstractEnemy {
 
     /**攻击方式 */
 
@@ -63,21 +60,27 @@ public class EliteEnemy extends AbstractAircraft {
      * 通过射击产生子弹
      * @return 射击出的子弹List
      */
-    public List<BaseBullet> shoot() {
-        List<BaseBullet> res = new LinkedList<>();
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int speedX = 0;
-        int speedY = this.getSpeedY() + direction*3;
-        BaseBullet bullet;
-        for(int i=0; i<shootNum; i++){
-            // 子弹发射位置相对飞机位置向前偏移
-            // 多个子弹横向分散
-            bullet = new EnemyBullet(x + (i*2 - shootNum + 1)*10, y, speedX, speedY, power);
-            res.add(bullet);
-        }
-        return res;
+    public List<BaseBullet> shoot()
+    {
+        setAbstractTrajectory(new Direct());
+        return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
+                this.shootNum, this.power, this.getSpeedY() + direction*3, isHero);
     }
+//    public List<BaseBullet> shoot() {
+//        List<BaseBullet> res = new LinkedList<>();
+//        int x = this.getLocationX();
+//        int y = this.getLocationY() + direction*2;
+//        int speedX = 0;
+//        int speedY = this.getSpeedY() + direction*3;
+//        BaseBullet bullet;
+//        for(int i=0; i<shootNum; i++){
+//            // 子弹发射位置相对飞机位置向前偏移
+//            // 多个子弹横向分散
+//            bullet = new EnemyBullet(x + (i*2 - shootNum + 1)*10, y, speedX, speedY, power);
+//            res.add(bullet);
+//        }
+//        return res;
+//    }
 
     public List<AbstractSupport> Drop(){
         int x = this.getLocationX();
@@ -85,11 +88,11 @@ public class EliteEnemy extends AbstractAircraft {
         int speedX = direction*2;
         int speedY = direction*2;
         List<AbstractSupport> res = new LinkedList<>();
-        if (Math.random()< 0.6) {
+        if (Math.random()< 1) {
             SupportFactory support;
-            if (Math.random() < 0.4)
+            if (Math.random() < 0)
                 support = new HealFactory();
-            else if (Math.random() < 0.6)
+            else if (Math.random() < 0)
                 support = new BombFactory();
             else
                 support = new FireFactory();

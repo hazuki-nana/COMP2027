@@ -1,16 +1,13 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.BulletTrajectory.Scatter;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.propFac.BombFactory;
 import edu.hitsz.propFac.FireFactory;
 import edu.hitsz.propFac.HealFactory;
 import edu.hitsz.propFac.SupportFactory;
 import edu.hitsz.support.AbstractSupport;
-import edu.hitsz.support.Bomb;
-import edu.hitsz.support.Fire;
-import edu.hitsz.support.Heal;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
  * 精英飞机，定时射击子弹
  * @author hitsz
  */
-public class PlusEnemy extends AbstractAircraft {
+public class PlusEnemy extends AbstractEnemy {
 
     /**攻击方式 */
 
@@ -63,22 +60,28 @@ public class PlusEnemy extends AbstractAircraft {
      * 通过射击产生子弹
      * @return 射击出的子弹List
      */
-    public List<BaseBullet> shoot() {
-        double a = 30.0;
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int[] speedX = new int [shootNum];
-        int[] speedY = new int [shootNum];
-        for (int i = 0; i < shootNum; i++) {
-            double angle = Math.toRadians(a * (i - 1)); // 将角度转换为弧度
-            speedX[i] = (int) (Math.sin(angle) * 10);
-            speedY[i] =  (int) (Math.cos(angle) * 10);
-        }
-        BaseBullet[] bullet = new BaseBullet[3];
-        for(int i=0; i<shootNum; i++)
-            bullet[i] = new EnemyBullet(x, y, speedX[i], speedY[i], power);
-        return new LinkedList<>(List.of(bullet));
+    public List<BaseBullet> shoot()
+    {
+        setAbstractTrajectory(new Scatter());
+        return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
+                this.shootNum, this.power, this.getSpeedY() + direction*3, isHero);
     }
+//    public List<BaseBullet> shoot() {
+//        double a = 30.0;
+//        int x = this.getLocationX();
+//        int y = this.getLocationY() + direction*2;
+//        int[] speedX = new int [shootNum];
+//        int[] speedY = new int [shootNum];
+//        for (int i = 0; i < shootNum; i++) {
+//            double angle = Math.toRadians(a * (i - 1)); // 将角度转换为弧度
+//            speedX[i] = (int) (Math.sin(angle) * 10);
+//            speedY[i] =  (int) (Math.cos(angle) * 10);
+//        }
+//        BaseBullet[] bullet = new BaseBullet[3];
+//        for(int i=0; i<shootNum; i++)
+//            bullet[i] = new EnemyBullet(x, y, speedX[i], speedY[i], power);
+//        return new LinkedList<>(List.of(bullet));
+//    }
 
     public List<AbstractSupport> Drop(){
         int x = this.getLocationX();

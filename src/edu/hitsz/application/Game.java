@@ -39,6 +39,7 @@ public class Game extends JPanel {
     private final List<BaseBullet> enemyBullets;
     private final List<AbstractSupport> supports;
     private EnemyFactory enemyFactory;
+    boolean flag = false;
     /**
      * 屏幕中出现的敌机最大数量
      */
@@ -100,20 +101,19 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-
-
-
-                if (enemyAircrafts.size() < enemyMaxNumber) {
-                    if(Math.random()<0.6)
+                if (score % 100 < 40 && score % 100 > 0 && score >= 100 && flag) {
+                    enemyFactory = new BossFactory();
+                    flag = false;
+                } else if (enemyAircrafts.size() < enemyMaxNumber) {
+                    if (Math.random() < 0.6)
                         enemyFactory = new MobFactory();
-                    else if (Math.random()<0.85)
-                        enemyFactory = new BossFactory();
+                    else if (Math.random() < 0.85)
+                        enemyFactory = new EliteFactory();
                     else enemyFactory = new PlusFactory();
-                    enemyAircrafts.add(enemyFactory.CreatEnemy());
                 }
-
-
-
+                enemyAircrafts.add(enemyFactory.CreatEnemy());
+                if (score % 100 > 80 && !flag)
+                    flag = true;
                 // 飞机射出子弹
                 shootAction();
             }
@@ -244,6 +244,8 @@ public class Game extends JPanel {
                             score +=10;
                         else if (enemyAircraft instanceof PlusEnemy)
                             score +=20;
+                        else if (enemyAircraft instanceof BossEnemy)
+                            score +=70;
                         score += 10;
                         supports.addAll(enemyAircraft.Drop());
                     }
