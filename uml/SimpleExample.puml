@@ -8,7 +8,6 @@ class HeroAircraft {
     - isHero:boolean
     + forward():void
     + shoot():List<BaseBullet>
-    + drop() :List<AbstractSupport>
     + increaseHp(int hp):void
     + increaseFire():void
     + Explode():void

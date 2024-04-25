@@ -90,23 +90,7 @@ public class BossEnemy extends AbstractEnemy {
 //    }
 //    public List<BaseBullet> shoot(){return new LinkedList<>();}
     public List<AbstractSupport> Drop(){
-        int x = this.getLocationX();
-        int y = this.getLocationY();
-        int speedX = direction*2;
-        int speedY = direction*4;
-        SupportFactory support;
-        int propnum = (int)(Math.random() * 3);
-        AbstractSupport[] slist = new AbstractSupport[propnum];
-        for (int i = 0; i < propnum; i++){
-            if (Math.random() < 0.4)
-                support = new HealFactory();
-            else if (Math.random() < 0.6)
-                support = new BombFactory();
-            else
-                support = new FireFactory();
-            slist[i] = support.CreatSupport(x + (i*2 - propnum + 1)*10, y, speedX, speedY);
-        }
-        return new LinkedList<>(List.of(slist));
+        return creatDrop(3);
     }
 //public List<AbstractSupport> Drop(){ return new ArrayList<>();}
 

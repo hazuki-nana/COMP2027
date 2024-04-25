@@ -55,7 +55,6 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
      *  非可射击对象空实现，返回null
      */
     public abstract List<BaseBullet> shoot();
-    public abstract List<AbstractSupport> Drop();
 }
 
 

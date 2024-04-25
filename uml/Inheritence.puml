@@ -34,7 +34,6 @@ abstract class AbstractAircraft
     + decreaseHp(int decrease):void
     + getHp():int
     + {abstract} shoot():List<BaseBullet>
-    + {abstract} drop() :List<AbstractSupport>
  }
 
 
@@ -47,7 +46,6 @@ class HeroAircraft {
     - isHero:boolean
     + forward():void
     + shoot():List<BaseBullet>
-    + drop() :List<AbstractSupport>
     + increaseHp(int hp):void
     + increaseFire():void
     + Explode():void
@@ -60,6 +58,7 @@ abstract class AbstractEnemy
 {
     #isHero:boolean
     +AbstractEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    +creatDrop(int num):List<BaseBullet>
     +{abstract}shoot():List<BaseBullet>
     +{abstract}Drop():List<AbstractSupport>
 }

@@ -64,7 +64,7 @@ class MobEnemy {
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- MobEnemy
+AbstractEnemy <|-- MobEnemy
 
 class PlusEnemy{
     + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
@@ -72,7 +72,7 @@ class PlusEnemy{
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- PlusEnemy
+AbstractEnemy <|-- PlusEnemy
 
 class EliteEnemy {
     - shootNum:int
@@ -82,7 +82,7 @@ class EliteEnemy {
     + forward():void
     + shoot():List<BaseBullet>
 }
-AbstractAircraft <|-- EliteEnemy
+AbstractEnemy <|-- EliteEnemy
 
 class BossEnemy{
     + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
@@ -90,35 +90,28 @@ class BossEnemy{
     + shoot():List<BaseBullet>
     + drop() :List<AbstractSupport>
 }
-AbstractAircraft <|-- BossEnemy
+AbstractEnemy <|-- BossEnemy
 
-abstract class AbstractAircraft
+abstract class AbstractEnemy
 {
-	# maxHp:int
-    # hp:int
-    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
-    + decreaseHp(int decrease):void
-    + getHp():int
-    + {abstract} shoot():List<BaseBullet>
-    + {abstract} drop() :List<AbstractSupport>
- }
+}
 
 abstract class EnemyFactory {
-    +{abstract}CreatEnemy():AbstractAircraft;
+    +{abstract}CreatEnemy():AbstractEnemy;
 }
 class EliteFactory {
-    +CreatEnemy():AbstractAircraft;
+    +CreatEnemy():AbstractEnemy;
 }
 class MobFactory {
-    +CreatEnemy():AbstractAircraft;
+    +CreatEnemy():AbstractEnemy;
 }
 class PlusFactory{
     -direction():int
-    +CreatEnemy():AbstractAircraft;
+    +CreatEnemy():AbstractEnemy;
 }
 class BossFactory{
     -direction():int
-    +CreatEnemy():AbstractSupport;
+    +CreatEnemy():AbstractEnemy;
 }
 MobEnemy <.. MobFactory
 EliteEnemy <.. EliteFactory
@@ -132,7 +125,7 @@ BossEnemy <.. BossFactory
 
 
 class game{}
-game ..> AbstractAircraft
+game ..> AbstractEnemy
 game ..> EnemyFactory
 game ..> AbstractSupport
 EliteEnemy ..> SupportFactory

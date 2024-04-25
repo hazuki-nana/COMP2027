@@ -1,5 +1,6 @@
 package edu.hitsz.airFac;
 import edu.hitsz.aircraft.AbstractAircraft;
+import edu.hitsz.aircraft.AbstractEnemy;
 import edu.hitsz.aircraft.PlusEnemy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
@@ -10,7 +11,7 @@ public class PlusFactory extends EnemyFactory{
         else return -1;
     }
     @Override
-    public AbstractAircraft CreatEnemy() {
+    public AbstractEnemy CreatEnemy() {
         return new PlusEnemy(
                 (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())),
                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),

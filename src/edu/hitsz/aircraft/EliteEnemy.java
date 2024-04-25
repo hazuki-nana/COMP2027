@@ -82,23 +82,7 @@ public class EliteEnemy extends AbstractEnemy {
 //        return res;
 //    }
 
-    public List<AbstractSupport> Drop(){
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int speedX = direction*2;
-        int speedY = direction*2;
-        List<AbstractSupport> res = new LinkedList<>();
-        if (Math.random()< 1) {
-            SupportFactory support;
-            if (Math.random() < 0)
-                support = new HealFactory();
-            else if (Math.random() < 0)
-                support = new BombFactory();
-            else
-                support = new FireFactory();
-            res.add(support.CreatSupport(x, y, speedX, speedY));
-        }
-        return res;
+    public List<AbstractSupport> Drop() {
+        return creatDrop(1);
     }
-
 }

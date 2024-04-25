@@ -83,23 +83,8 @@ public class PlusEnemy extends AbstractEnemy {
 //        return new LinkedList<>(List.of(bullet));
 //    }
 
-    public List<AbstractSupport> Drop(){
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int speedX = direction*2;
-        int speedY = direction*2;
-        List<AbstractSupport> res = new LinkedList<>();
-        if (Math.random()< 0.6) {
-            SupportFactory support;
-            if (Math.random() < 0.4)
-                support = new HealFactory();
-            else if (Math.random() < 0.6)
-                support = new BombFactory();
-            else
-                support = new FireFactory();
-            res.add(support.CreatSupport(x, y, speedX, speedY));
-        }
-        return res;
+    public List<AbstractSupport> Drop() {
+        return creatDrop(1);
     }
 
 }

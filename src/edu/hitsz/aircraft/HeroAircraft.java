@@ -115,7 +115,6 @@ public class HeroAircraft extends AbstractAircraft {
         System.out.println("Bomb support active!");
     }
 
-    public List<AbstractSupport> Drop(){return new LinkedList<>();};
 
     public static HeroAircraft getHeroAircraft() {
         if (heroAircraft == null){
