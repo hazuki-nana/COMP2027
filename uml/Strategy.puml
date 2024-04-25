@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+abstract class AbstractTrajectory
+{
+    +{abstract}shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
+}
+
+class Circle
+{
+    +shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
+}
+
+class Scatter
+{
+    +shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
+}
+
+class Direct
+{
+    +shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
+}
+AbstractTrajectory <|-- Circle
+AbstractTrajectory <|-- Scatter
+AbstractTrajectory <|-- Direct
+
+abstract class AbstractAircraft
+{
+	# maxHp:int
+    # hp:int
+    - AbstractTrajectory abstractTrajectory
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + decreaseHp(int decrease):void
+    + getHp():int
+    + {abstract} shoot():List<BaseBullet>
+    + {abstract} drop() :List<AbstractSupport>
+    + setTrajectory(AbstractTrajectory abstractTrajectory):void
+    + executeShoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
+}
+AbstractAircraft o--> AbstractTrajectory
+HeroAircraft --|> AbstractAircraft
+MobEnemy --|> AbstractAircraft
+BossEnemy --|> AbstractAircraft
+EliteEnemy --|> AbstractAircraft
+PlusEnemy --|> AbstractAircraft
+@enduml
