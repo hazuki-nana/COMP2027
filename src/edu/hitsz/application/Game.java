@@ -357,7 +357,7 @@ public class Game extends JPanel {
 
 
     private void PrintData() throws IOException {
-        DaoImpl dao = new DaoImpl();;
+        DaoImpl dao = new DaoImpl();
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedTime = currentTime.format(formatter);
