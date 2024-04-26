@@ -7,7 +7,7 @@ import edu.hitsz.bullet.HeroBullet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Scatter extends AbstractTrajectory{
+public class Scatter implements AbstractTrajectory{
 
     @Override
     public List<BaseBullet> shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero) {

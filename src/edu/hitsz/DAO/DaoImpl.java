@@ -55,12 +55,12 @@ public class DaoImpl implements DAO{
     }
 
     @Override
-    public void addScore(Player score) throws IOException {
-        Files.writeString(Paths.get(folderFilePath), "\n"+score.toString(), StandardOpenOption.APPEND);
+    public void addScore(Player player) throws IOException {
+        Files.writeString(Paths.get(folderFilePath), "\n"+player.toString(), StandardOpenOption.APPEND);
     }
 
     @Override
-    public void updateScore(Player score) {
+    public void updateScore(Player player) {
 
     }
 

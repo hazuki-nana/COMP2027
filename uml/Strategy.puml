@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-abstract class AbstractTrajectory
+interface AbstractTrajectory
 {
     +{abstract}shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
 }
@@ -20,9 +20,9 @@ class Direct
 {
     +shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
 }
-AbstractTrajectory <|-- Circle
-AbstractTrajectory <|-- Scatter
-AbstractTrajectory <|-- Direct
+AbstractTrajectory <|.. Circle
+AbstractTrajectory <|.. Scatter
+AbstractTrajectory <|.. Direct
 
 abstract class AbstractAircraft
 {

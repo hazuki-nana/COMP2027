@@ -363,8 +363,11 @@ public class Game extends JPanel {
         String formattedTime = currentTime.format(formatter);
         Player player = new Player("mytest", score, formattedTime);
         dao.addScore(player);
-        for (Player py : dao.getAllScores()){
-            System.out.println(py.toString());
+        List<Player> Players = dao.getAllScores();
+        Collections.sort(Players);
+        int i = 0;
+        for (Player py : Players){
+            System.out.println("第" + ++i + "名  "+py.toString());
         }
     }
 }

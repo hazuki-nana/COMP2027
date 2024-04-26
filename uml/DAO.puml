@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+interface DAO {
+    +List<Player> getAllScores() throws IOException:void
+    +List<Player> getScore(String username) throws IOException:void
+    +addScore(Player player) throws IOException:void
+    +updateScore(Player player):void
+    +deleteScore(int id):void
+}
+
+class DaoImpl{
+    -in:InputStream;
+    -folderPath:String;
+    -fileName:String;
+    -br:BufferedReader;
+    -folderFilePath:String;
+    +DaoImpl():void
+    +getAllScores():List<Player>
+    +getScore(String username):List<Player>
+    +addScore(Player player):void
+    +updateScore(Player player):void
+    +deleteScore(int id):void
+}
+DAO <|.. DaoImpl
+
+class Player{
+    #score:int
+    #username:String
+    #time:String
+    +Player():void
+    +toString():String
+    +compareTo(object o):int
+}
+Player <-- DaoImpl
+
+Game ..> DAO
+@enduml
