@@ -1,5 +1,7 @@
 package edu.hitsz.application;
 
+import edu.hitsz.DAO.DaoImpl;
+import edu.hitsz.DAO.Player;
 import edu.hitsz.airFac.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
@@ -10,6 +12,9 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
@@ -142,6 +147,11 @@ public class Game extends JPanel {
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
+                try {
+                    PrintData();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
         };
@@ -346,4 +356,15 @@ public class Game extends JPanel {
     }
 
 
+    private void PrintData() throws IOException {
+        DaoImpl dao = new DaoImpl();;
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+        Player player = new Player("mytest", score, formattedTime);
+        dao.addScore(player);
+        for (Player py : dao.getAllScores()){
+            System.out.println(py.toString());
+        }
+    }
 }

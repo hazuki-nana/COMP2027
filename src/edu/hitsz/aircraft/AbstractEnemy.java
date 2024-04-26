@@ -1,10 +1,7 @@
 package edu.hitsz.aircraft;
 
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.propFac.BombFactory;
-import edu.hitsz.propFac.FireFactory;
-import edu.hitsz.propFac.HealFactory;
-import edu.hitsz.propFac.SupportFactory;
+import edu.hitsz.propFac.*;
 import edu.hitsz.support.AbstractSupport;
 
 import java.util.LinkedList;
@@ -26,12 +23,14 @@ public abstract class AbstractEnemy extends AbstractAircraft{
         int propnum = (int)(Math.random() * (num+1));
         AbstractSupport[] slist = new AbstractSupport[propnum];
         for (int i = 0; i < propnum; i++){
-            if (Math.random() < 0.4)
+            if (Math.random() < 0.3)
                 support = new HealFactory();
-            else if (Math.random() < 0.6)
+            else if (Math.random() < 0.5)
                 support = new BombFactory();
-            else
+            else if (Math.random() < 0.7)
                 support = new FireFactory();
+            else
+                support = new PlusFireFactory();
             slist[i] = support.CreatSupport(x + (i*2 - propnum + 1)*10, y, speedX, speedY);
         }
         return new LinkedList<>(List.of(slist));

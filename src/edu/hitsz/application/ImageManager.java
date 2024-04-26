@@ -7,6 +7,7 @@ import edu.hitsz.bullet.HeroBullet;
 import edu.hitsz.support.Bomb;
 import edu.hitsz.support.Fire;
 import edu.hitsz.support.Heal;
+import edu.hitsz.support.PlusFire;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -40,6 +41,7 @@ public class ImageManager {
     public static BufferedImage HEAL_IMAGE;
     public static BufferedImage FIRE_IMAGE;
     public static BufferedImage BOMB_IMAGE;
+    public static BufferedImage PLUS_FIRE_IMAGE;
 
     static {
         try {
@@ -56,6 +58,7 @@ public class ImageManager {
             HEAL_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_blood.png"));
             FIRE_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bullet.png"));
             BOMB_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bomb.png"));
+            PLUS_FIRE_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bulletPlus.png"));
 
             CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);
             CLASSNAME_IMAGE_MAP.put(MobEnemy.class.getName(), MOB_ENEMY_IMAGE);
@@ -67,6 +70,7 @@ public class ImageManager {
             CLASSNAME_IMAGE_MAP.put(Heal.class.getName(), HEAL_IMAGE);
             CLASSNAME_IMAGE_MAP.put(Fire.class.getName(), FIRE_IMAGE);
             CLASSNAME_IMAGE_MAP.put(Bomb.class.getName(), BOMB_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(PlusFire.class.getName(), PLUS_FIRE_IMAGE);
 
         } catch (IOException e) {
             e.printStackTrace();

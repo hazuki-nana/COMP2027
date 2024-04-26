@@ -1,5 +1,4 @@
 package edu.hitsz.airFac;
-import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.aircraft.AbstractEnemy;
 import edu.hitsz.aircraft.PlusEnemy;
 import edu.hitsz.application.ImageManager;
