@@ -106,7 +106,7 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                if (score % 100 < 40 && score % 100 > 0 && score >= 100 && flag) {
+                if (score % 1000 < 100 && score % 1000 > 0 && score >= 1000 && flag) {
                     enemyFactory = new BossFactory();
                     flag = false;
                 } else if (enemyAircrafts.size() < enemyMaxNumber) {
@@ -117,7 +117,7 @@ public class Game extends JPanel {
                     else enemyFactory = new PlusFactory();
                 }
                 enemyAircrafts.add(enemyFactory.CreatEnemy());
-                if (score % 100 > 80 && !flag)
+                if (score % 1000 > 900 && !flag)
                     flag = true;
                 // 飞机射出子弹
                 shootAction();

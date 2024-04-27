@@ -48,7 +48,7 @@ public class DaoImpl implements DAO{
     public List<Player> getScore(String username) throws IOException {
         List<Player> res = new ArrayList<>();
         for (Player User : this.getAllScores()){
-            if(User.username.equals(username))
+            if(User.getUsername().equals(username))
                 res.add(User);
         }
         return res;

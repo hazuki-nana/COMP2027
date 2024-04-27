@@ -33,7 +33,6 @@ abstract class AbstractAircraft
     + decreaseHp(int decrease):void
     + getHp():int
     + {abstract} shoot():List<BaseBullet>
-    + {abstract} drop() :List<AbstractSupport>
     + setTrajectory(AbstractTrajectory abstractTrajectory):void
     + executeShoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
 }

@@ -25,10 +25,11 @@ class DaoImpl{
 DAO <|.. DaoImpl
 
 class Player{
-    #score:int
-    #username:String
-    #time:String
+    -score:int
+    -username:String
+    -time:String
     +Player():void
+    +getUsername(String username):String
     +toString():String
     +compareTo(object o):int
 }

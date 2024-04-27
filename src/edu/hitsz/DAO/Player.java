@@ -1,9 +1,9 @@
 package edu.hitsz.DAO;
 
 public class Player implements Comparable{
-    int score;
-    String username;
-    String time;
+    private int score;
+    private String username;
+    private String time;
 
     public Player(String username, int score, String time) {
         this.username = username;
@@ -11,6 +11,10 @@ public class Player implements Comparable{
         this.time = time;
     }
 
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {}
     public String toString()
     {
         return username + "  " + score + "  " + time;
