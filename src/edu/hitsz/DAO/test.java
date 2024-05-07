@@ -27,7 +27,7 @@ public class test {
         for(Player s : T.getAllScores())
             System.out.println(s.toString());
         System.out.println(T.getScore("casd").toString());
-        T.addScore(new Player("456", 23, "51"));
+        T.addScore(new Player("#####", 23, "51"));
         System.out.println(T.getScore("456").toString());
         System.out.println(T.getAllScores());
         System.out.println("////////");

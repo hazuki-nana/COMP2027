@@ -1,9 +1,12 @@
-package edu.hitsz.application;
+package Game;
 
 import edu.hitsz.DAO.DaoImpl;
 import edu.hitsz.DAO.Player;
 import edu.hitsz.airFac.*;
 import edu.hitsz.aircraft.*;
+import edu.hitsz.application.HeroController;
+import edu.hitsz.application.ImageManager;
+import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.support.AbstractSupport;
@@ -24,7 +27,10 @@ import java.util.concurrent.*;
  *
  * @author hitsz
  */
-public class Game extends JPanel {
+public abstract class BaseGame extends JPanel {
+
+    public static final int WINDOW_WIDTH = 512;
+    public static final int WINDOW_HEIGHT = 768;
 
     private int backGroundTop = 0;
 
@@ -71,7 +77,9 @@ public class Game extends JPanel {
      */
     private boolean gameOverFlag = false;
 
-    public Game() {
+    public abstract void startGame();
+
+    public BaseGame() {
         heroAircraft = HeroAircraft.getHeroAircraft();
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
@@ -332,7 +340,7 @@ public class Game extends JPanel {
 
     }
 
-    private void paintImageWithPositionRevised(Graphics g, List<? extends AbstractFlyingObject> objects) {
+    void paintImageWithPositionRevised(Graphics g, List<? extends AbstractFlyingObject> objects) {
         if (objects.size() == 0) {
             return;
         }
@@ -345,7 +353,7 @@ public class Game extends JPanel {
         }
     }
 
-    private void paintScoreAndLife(Graphics g) {
+    void paintScoreAndLife(Graphics g) {
         int x = 10;
         int y = 25;
         g.setColor(new Color(16711680));
@@ -370,4 +378,6 @@ public class Game extends JPanel {
             System.out.println("第" + ++i + "名  "+py.toString());
         }
     }
+
+
 }

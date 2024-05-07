@@ -44,6 +44,7 @@ public class PlusEnemy extends AbstractEnemy {
      */
     public PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
+        setAbstractTrajectory(new Scatter());
     }
 
     @Override
@@ -62,7 +63,7 @@ public class PlusEnemy extends AbstractEnemy {
      */
     public List<BaseBullet> shoot()
     {
-        setAbstractTrajectory(new Scatter());
+
         return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
                 this.shootNum, this.power, this.getSpeedY() + direction*3, isHero);
     }
