@@ -1,5 +1,7 @@
 package edu.hitsz.Music;
 
+import Graph.Start;
+
 public class MusicPlay {
 
     private String Folder = "src/videos/";
@@ -11,10 +13,12 @@ public class MusicPlay {
     }
 
     public MusicPlay(String filename) {
-        this.filename = filename;
-        filepath = Folder + filename + ".wav";
-        musicThread = new MusicThread(filepath);
-        musicThread.start();
+        if (Start.isSoundOn){
+            this.filename = filename;
+            filepath = Folder + filename + ".wav";
+            musicThread = new MusicThread(filepath);
+            musicThread.start();
+        }
     }
 
 }

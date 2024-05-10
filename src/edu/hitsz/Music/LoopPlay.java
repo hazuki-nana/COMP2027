@@ -1,15 +1,14 @@
 package edu.hitsz.Music;
 
 public class LoopPlay extends Thread{
-    private volatile boolean playing;
+    private volatile boolean playing = true;
     private volatile boolean isBoss = false;
     private volatile boolean gameOverFlag;
     private final Object lock = new Object();
 
     private MusicPlay musicPlay;
 
-    public LoopPlay(boolean isSoundOn){
-        playing = isSoundOn;
+    public LoopPlay(){
     }
     public void run(){
         while(playing && !gameOverFlag) {

@@ -103,7 +103,7 @@ public class BaseGame extends JPanel {
         //启动英雄机鼠标监听
         new HeroController(this, heroAircraft);
 
-        lp = new LoopPlay(Start.isSoundOn);
+        lp = new LoopPlay();
         lp.start();
     }
 
