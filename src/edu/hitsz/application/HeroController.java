@@ -1,6 +1,6 @@
 package edu.hitsz.application;
 
-import Game.BaseGame;
+import edu.hitsz.Game.BaseGame;
 import edu.hitsz.aircraft.HeroAircraft;
 
 import java.awt.event.MouseAdapter;

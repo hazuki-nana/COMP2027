@@ -1,25 +1,11 @@
-package Game;
+package edu.hitsz.Game;
 
-import edu.hitsz.airFac.EnemyFactory;
-import edu.hitsz.aircraft.AbstractEnemy;
-import edu.hitsz.aircraft.HeroAircraft;
-import edu.hitsz.application.HeroController;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
-import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.support.AbstractSupport;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
-public class GameS extends BaseGame{
+public class GameH extends BaseGame{
     /**
      * 屏幕中出现的敌机最大数量
      */
@@ -41,10 +27,9 @@ public class GameS extends BaseGame{
     private int cycleDuration = 600;
     private int cycleTime = 0;
 
-
-    public GameS(){
+    public GameH(){
         super();
-        setDiff("Simple");
+        setDiff("Hard");
     }
 
     @Override
@@ -52,8 +37,8 @@ public class GameS extends BaseGame{
         super.paint(g);
 
         // 绘制背景,图片滚动
-        g.drawImage(ImageManager.BACKGROUND_IMAGE2, 0, this.backGroundTop - Main.WINDOW_HEIGHT, null);
-        g.drawImage(ImageManager.BACKGROUND_IMAGE2, 0, this.backGroundTop, null);
+        g.drawImage(ImageManager.BACKGROUND_IMAGE5, 0, this.backGroundTop - Main.WINDOW_HEIGHT, null);
+        g.drawImage(ImageManager.BACKGROUND_IMAGE5, 0, this.backGroundTop, null);
         this.backGroundTop += 1;
         if (this.backGroundTop == Main.WINDOW_HEIGHT) {
             this.backGroundTop = 0;

@@ -1,6 +1,6 @@
 package edu.hitsz.Music;
 
-import Graph.Start;
+import edu.hitsz.Graph.Start;
 
 public class MusicPlay {
 

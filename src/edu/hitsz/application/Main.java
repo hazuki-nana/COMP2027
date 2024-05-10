@@ -1,13 +1,10 @@
 package edu.hitsz.application;
 
-import Game.BaseGame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-import Graph.Rank;
-import Graph.Start;
+import edu.hitsz.Graph.Start;
 
 /**
  * 程序入口

@@ -1,6 +1,6 @@
-package Graph;
+package edu.hitsz.Graph;
 
-import Game.GameChoosing;
+import edu.hitsz.Game.GameChoosing;
 import edu.hitsz.application.Main;
 
 import javax.swing.*;

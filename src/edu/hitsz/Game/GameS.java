@@ -1,13 +1,11 @@
-package Game;
+package edu.hitsz.Game;
 
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
-import javax.swing.*;
 import java.awt.*;
 
-public class GameN extends BaseGame{
-
+public class GameS extends BaseGame{
     /**
      * 屏幕中出现的敌机最大数量
      */
@@ -29,9 +27,10 @@ public class GameN extends BaseGame{
     private int cycleDuration = 600;
     private int cycleTime = 0;
 
-    public GameN(){
+
+    public GameS(){
         super();
-        setDiff("Normal");
+        setDiff("Simple");
     }
 
     @Override
@@ -39,8 +38,8 @@ public class GameN extends BaseGame{
         super.paint(g);
 
         // 绘制背景,图片滚动
-        g.drawImage(ImageManager.BACKGROUND_IMAGE3, 0, this.backGroundTop - Main.WINDOW_HEIGHT, null);
-        g.drawImage(ImageManager.BACKGROUND_IMAGE3, 0, this.backGroundTop, null);
+        g.drawImage(ImageManager.BACKGROUND_IMAGE2, 0, this.backGroundTop - Main.WINDOW_HEIGHT, null);
+        g.drawImage(ImageManager.BACKGROUND_IMAGE2, 0, this.backGroundTop, null);
         this.backGroundTop += 1;
         if (this.backGroundTop == Main.WINDOW_HEIGHT) {
             this.backGroundTop = 0;

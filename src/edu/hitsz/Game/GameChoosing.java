@@ -1,4 +1,4 @@
-package Game;
+package edu.hitsz.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +11,15 @@ public class GameChoosing {
         mainPanel = new JPanel();
         BaseGame game = null;
         if (diff == 1){
-            System.out.println("Hello Aircraft War Simple");
+            System.out.println("Simple Mode");
             game = new GameS();
         }
         else if(diff == 2){
-            System.out.println("Hello Aircraft War Normal");
+            System.out.println("Normal Mode");
             game = new GameN();
         }
         else {
-            System.out.println("Hello Aircraft War Hard");
+            System.out.println("Hard Mode");
             game = new GameH();
         }
         game.setPreferredSize(new Dimension(512, 768));

@@ -1,7 +1,6 @@
-package Game;
+package edu.hitsz.Game;
 
-import Graph.Rank;
-import Graph.Start;
+import edu.hitsz.Graph.Rank;
 import edu.hitsz.Music.LoopPlay;
 import edu.hitsz.airFac.*;
 import edu.hitsz.aircraft.*;

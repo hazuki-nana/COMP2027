@@ -1,4 +1,4 @@
-package Graph;
+package edu.hitsz.Graph;
 
 import edu.hitsz.DAO.DaoImpl;
 import edu.hitsz.DAO.Player;
@@ -75,7 +75,6 @@ public class Rank {
         List<Player> players = new ArrayList<>();
         for(String[] sigData : InnData){
             Player player = new Player(sigData[1], Integer.valueOf(sigData[2]), sigData[3]);
-            System.out.println(player.toString());
             players.add(player);
         }
         dao.updateScore(players);
