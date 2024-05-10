@@ -24,7 +24,7 @@ public class GameChoosing {
         }
         game.setPreferredSize(new Dimension(512, 768));
         mainPanel.add(game);
-        game.startGame();
+        game.action();
     }
 
 

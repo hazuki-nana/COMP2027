@@ -4,6 +4,9 @@ import Game.BaseGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+
+import Graph.Rank;
 import Graph.Start;
 
 /**
@@ -18,7 +21,7 @@ public class Main {
     public static final CardLayout cardLayout = new CardLayout(0, 0);
     public static final JPanel cardPanel = new JPanel(cardLayout);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("Hello Aircraft War");
 
@@ -36,6 +39,7 @@ public class Main {
 
         Start start = new Start();
         cardPanel.add(start.getMainPanel());
+
         frame.setVisible(true);
 
     }

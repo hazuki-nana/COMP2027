@@ -11,11 +11,13 @@ public class DaoImpl implements DAO{
 
     private InputStream in;
     private String folderPath = "DATABASE";
-    private String fileName = "SCORE.txt";
+    private String fileName = "SCORE";
     private BufferedReader br;
-    private String folderFilePath = folderPath + File.separator + fileName;
+    private String folderFilePath;
 
-    public DaoImpl() throws IOException {
+    public DaoImpl(String diff) throws IOException {
+        this.fileName = fileName + diff + ".txt";
+        folderFilePath = folderPath + File.separator + fileName;
         File folder = new File(folderPath);
         File file = new File(folderFilePath);
         if (!folder.exists()) {

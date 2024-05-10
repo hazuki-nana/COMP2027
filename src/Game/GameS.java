@@ -20,26 +20,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class GameS extends BaseGame{
-
-    private int backGroundTop = 0;
-
-    /**
-     * Scheduled 线程池，用于任务调度
-     */
-    private ScheduledExecutorService executorService;
-
-    /**
-     * 时间间隔(ms)，控制刷新频率
-     */
-    private int timeInterval = 40;
-
-    private final HeroAircraft heroAircraft;
-    private final java.util.List<AbstractEnemy> enemyAircrafts;
-    private final java.util.List<BaseBullet> heroBullets;
-    private final java.util.List<BaseBullet> enemyBullets;
-    private final List<AbstractSupport> supports;
-    private EnemyFactory enemyFactory;
-    boolean flag = false;
     /**
      * 屏幕中出现的敌机最大数量
      */
@@ -61,28 +41,12 @@ public class GameS extends BaseGame{
     private int cycleDuration = 600;
     private int cycleTime = 0;
 
-    /**
-     * 游戏结束标志
-     */
-    private boolean gameOverFlag = false;
 
     public GameS(){
-        heroAircraft = HeroAircraft.getHeroAircraft();
-        enemyAircrafts = new LinkedList<>();
-        heroBullets = new LinkedList<>();
-        enemyBullets = new LinkedList<>();
-        supports = new LinkedList<>();
-
-
-
-        //启动英雄机鼠标监听
-        new HeroController(this, heroAircraft);
+        super();
+        setDiff("Simple");
     }
 
-    public void startGame(){
-        this.executorService = new ScheduledThreadPoolExecutor(1,
-                new BasicThreadFactory.Builder().namingPattern("game-action-%d").daemon(true).build());
-    }
     @Override
     public void paint(Graphics g) {
         super.paint(g);

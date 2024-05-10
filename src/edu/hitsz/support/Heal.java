@@ -1,7 +1,10 @@
 package edu.hitsz.support;
 
+import edu.hitsz.aircraft.AbstractEnemy;
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.basic.AbstractFlyingObject;
+
+import java.util.List;
 
 public class Heal extends AbstractSupport {
 
@@ -11,7 +14,7 @@ public class Heal extends AbstractSupport {
         super(locationX, locationY, speedX, speedY);
         hp = 10;
     }
-    public void Effect(HeroAircraft heroAircraft){
+    public void Effect(HeroAircraft heroAircraft, List<AbstractEnemy> enemyList){
         heroAircraft.increaseHp(hp);
     }
 

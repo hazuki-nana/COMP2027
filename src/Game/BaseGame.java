@@ -1,12 +1,14 @@
 package Game;
 
-import edu.hitsz.DAO.DaoImpl;
-import edu.hitsz.DAO.Player;
+import Graph.Rank;
+import Graph.Start;
+import edu.hitsz.Music.LoopPlay;
 import edu.hitsz.airFac.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.application.HeroController;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
+import edu.hitsz.Music.MusicPlay;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 import edu.hitsz.support.AbstractSupport;
@@ -16,8 +18,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
@@ -27,29 +27,35 @@ import java.util.concurrent.*;
  *
  * @author hitsz
  */
-public abstract class BaseGame extends JPanel {
+public class BaseGame extends JPanel {
 
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
 
-    private int backGroundTop = 0;
+    public void setDiff(String diff) {
+        this.diff = diff;
+    }
+
+    private String diff = "default";
+
+    int backGroundTop = 0;
 
     /**
      * Scheduled 线程池，用于任务调度
      */
-    private final ScheduledExecutorService executorService;
+    final ScheduledExecutorService executorService;
 
     /**
      * 时间间隔(ms)，控制刷新频率
      */
-    private int timeInterval = 40;
+    int timeInterval = 40;
 
-    private final HeroAircraft heroAircraft;
-    private final List<AbstractEnemy> enemyAircrafts;
-    private final List<BaseBullet> heroBullets;
-    private final List<BaseBullet> enemyBullets;
-    private final List<AbstractSupport> supports;
-    private EnemyFactory enemyFactory;
+    final HeroAircraft heroAircraft;
+    final List<AbstractEnemy> enemyAircrafts;
+    final List<BaseBullet> heroBullets;
+    final List<BaseBullet> enemyBullets;
+    final List<AbstractSupport> supports;
+    EnemyFactory enemyFactory;
     boolean flag = false;
     /**
      * 屏幕中出现的敌机最大数量
@@ -75,9 +81,9 @@ public abstract class BaseGame extends JPanel {
     /**
      * 游戏结束标志
      */
-    private boolean gameOverFlag = false;
+    boolean gameOverFlag = false;
 
-    public abstract void startGame();
+    private LoopPlay lp;
 
     public BaseGame() {
         heroAircraft = HeroAircraft.getHeroAircraft();
@@ -97,6 +103,8 @@ public abstract class BaseGame extends JPanel {
         //启动英雄机鼠标监听
         new HeroController(this, heroAircraft);
 
+        lp = new LoopPlay(Start.isSoundOn);
+        lp.start();
     }
 
     /**
@@ -114,9 +122,10 @@ public abstract class BaseGame extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                if (score % 1000 < 100 && score % 1000 > 0 && score >= 1000 && flag) {
+                if (score % 500 < 50 && score % 500 > 0 && score >= 500 && flag) {
                     enemyFactory = new BossFactory();
                     flag = false;
+                    lp.updateIsBoss(true);
                 } else if (enemyAircrafts.size() < enemyMaxNumber) {
                     if (Math.random() < 0.6)
                         enemyFactory = new MobFactory();
@@ -125,7 +134,7 @@ public abstract class BaseGame extends JPanel {
                     else enemyFactory = new PlusFactory();
                 }
                 enemyAircrafts.add(enemyFactory.CreatEnemy());
-                if (score % 1000 > 900 && !flag)
+                if (score % 500 > 450 && !flag)
                     flag = true;
                 // 飞机射出子弹
                 shootAction();
@@ -155,8 +164,11 @@ public abstract class BaseGame extends JPanel {
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
+                lp.setGameOverFlag(gameOverFlag);
+                new MusicPlay("game_over");
                 try {
-                    PrintData();
+                    Main.cardPanel.add(new Rank(score, this.diff).getMainPanel());
+                    Main.cardLayout.last(Main.cardPanel);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -256,14 +268,17 @@ public abstract class BaseGame extends JPanel {
                     // 敌机损失一定生命值
                     enemyAircraft.decreaseHp(bullet.getPower());
                     bullet.vanish();
+                    new MusicPlay("bullet_hit");
                     if (enemyAircraft.notValid()) {
-                        // TODO 获得分数，产生道具补给
+                        // TODO 获得分数，产生道具补给, 切换音乐
                         if (enemyAircraft.getClass() == EliteEnemy.class)
                             score +=10;
                         else if (enemyAircraft instanceof PlusEnemy)
                             score +=20;
-                        else if (enemyAircraft instanceof BossEnemy)
+                        else if (enemyAircraft instanceof BossEnemy){
                             score +=70;
+                            lp.updateIsBoss(false);
+                        }
                         score += 10;
                         supports.addAll(enemyAircraft.Drop());
                     }
@@ -281,8 +296,9 @@ public abstract class BaseGame extends JPanel {
             if (support.notValid())
                 continue;
             if (heroAircraft.crash(support)){
-                support.Effect(heroAircraft);
+                support.Effect(heroAircraft, enemyAircrafts);
                 support.vanish();
+                new MusicPlay("get_supply");
             }
         }
 
@@ -362,22 +378,5 @@ public abstract class BaseGame extends JPanel {
         y = y + 20;
         g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y);
     }
-
-
-    private void PrintData() throws IOException {
-        DaoImpl dao = new DaoImpl();
-        LocalDateTime currentTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedTime = currentTime.format(formatter);
-        Player player = new Player("mytest", score, formattedTime);
-        dao.addScore(player);
-        List<Player> Players = dao.getAllScores();
-        Collections.sort(Players);
-        int i = 0;
-        for (Player py : Players){
-            System.out.println("第" + ++i + "名  "+py.toString());
-        }
-    }
-
 
 }

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class test {
-    DaoImpl dao = new DaoImpl();
+    DaoImpl dao = new DaoImpl("Hard");
 
     public test() throws IOException {
     }

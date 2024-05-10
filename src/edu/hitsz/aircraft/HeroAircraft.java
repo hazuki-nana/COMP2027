@@ -1,16 +1,13 @@
 package edu.hitsz.aircraft;
 
-import edu.hitsz.BulletTrajectory.AbstractTrajectory;
 import edu.hitsz.BulletTrajectory.Circle;
 import edu.hitsz.BulletTrajectory.Direct;
 import edu.hitsz.BulletTrajectory.Scatter;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
+import edu.hitsz.Music.MusicPlay;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.HeroBullet;
-import edu.hitsz.support.AbstractSupport;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,7 +26,7 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 子弹伤害
      */
-    private int power = 30;
+    private int power = 100;
 
     /**
      * 子弹射击方向 (向上发射：1，向下发射：-1)
@@ -111,8 +108,10 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 道具：清屏
      */
-    public void Explode(){
+    public void Explode(List<AbstractEnemy> enemyList){
         System.out.println("Bomb support active!");
+        enemyList.removeIf(enemy -> !(enemy instanceof BossEnemy));
+        new MusicPlay("bomb_explosion");
     }
 
 
@@ -123,7 +122,7 @@ public class HeroAircraft extends AbstractAircraft {
                 heroAircraft = new HeroAircraft(
                         Main.WINDOW_WIDTH / 2,
                         Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                        0, 0, 200);
+                        0, 0, 2000);
                 }
             }
         }

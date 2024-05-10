@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,11 +23,12 @@ public class Rank {
     private JButton Delete;
     private JScrollPane rankScroll;
 
-    private final DaoImpl dao = new DaoImpl();
+    private final DaoImpl dao;
 
     private ArrayList<String[]> InnData = new ArrayList<>();
-    public Rank() throws IOException {
-        addData(12);
+    public Rank(int score, String diff) throws IOException {
+        dao = new DaoImpl(diff);
+        addData(score);
         readData();
         String[] columnName = {"名次", "姓名", "分数", "时间"};
         String[][] Data = InnData.toArray(new String[0][0]);
@@ -81,23 +84,15 @@ public class Rank {
     private void addData(int score) throws IOException {
         String username = JOptionPane.showInputDialog(mainPanel, "游戏结束，您的得分为：" + score + "\n请输入你的用户名：");
         if (username == null) { username = "default";}
-        String time = "123456";
-        Player player = new Player(username, score, time);
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+        Player player = new Player(username, score, formattedTime);
         dao.addScore(player);
     }
 
     public JPanel getMainPanel(){
         return mainPanel;
     }
-
-    public static void main(String[] args) throws IOException {
-        JFrame frame = new JFrame("Rank");
-        frame.setSize(512, 768);
-        frame.setContentPane(new Rank().mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
 
 }
