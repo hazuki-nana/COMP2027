@@ -26,7 +26,7 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 子弹伤害
      */
-    private int power = 100;
+    private int power = 60;
 
     /**
      * 子弹射击方向 (向上发射：1，向下发射：-1)
@@ -66,21 +66,6 @@ public class HeroAircraft extends AbstractAircraft {
         return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
                 this.shootNum, this.power, this.getSpeedY() + direction*10, isHero);
     }
-//    public List<BaseBullet> shoot() {
-//        List<BaseBullet> res = new LinkedList<>();
-//        int x = this.getLocationX();
-//        int y = this.getLocationY() + direction*2;
-//        int speedX = 0;
-//        int speedY = this.getSpeedY() + direction*5;
-//        BaseBullet bullet;
-//        for(int i=0; i<shootNum; i++){
-//            // 子弹发射位置相对飞机位置向前偏移
-//            // 多个子弹横向分散
-//            bullet = new HeroBullet(x + (i*2 - shootNum + 1)*10, y, speedX, speedY, power);
-//            res.add(bullet);
-//        }
-//        return res;
-//    }
 
     /**
      * 道具：回复血量
@@ -97,6 +82,19 @@ public class HeroAircraft extends AbstractAircraft {
     public void increaseFire(){
         this.shootNum = 3;
         setAbstractTrajectory(new Scatter());
+
+        new Thread(new Runnable () {
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                finally {
+                    reverseFire();
+                }
+            }
+        }).start();
     }
     /**
      * 道具：超级火力增加
@@ -104,7 +102,30 @@ public class HeroAircraft extends AbstractAircraft {
     public void increasePlusFire(){
         this.shootNum = 20;
         setAbstractTrajectory(new Circle());
+
+        new Thread(new Runnable () {
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                finally {
+                    reverseFire();
+                }
+            }
+        }).start();
+
     }
+
+    /**
+     * 道具：还原
+     */
+    private void reverseFire(){
+        this.shootNum = 2;
+        setAbstractTrajectory(new Direct());
+    }
+
     /**
      * 道具：清屏
      */
@@ -122,7 +143,7 @@ public class HeroAircraft extends AbstractAircraft {
                 heroAircraft = new HeroAircraft(
                         Main.WINDOW_WIDTH / 2,
                         Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                        0, 0, 2000);
+                        0, 0, 300);
                 }
             }
         }
