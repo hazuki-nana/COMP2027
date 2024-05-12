@@ -23,9 +23,16 @@ public class MusicThread extends Thread {
     private byte[] samples;
     private boolean stop = false;
 
-    public MusicThread(String filename) {
+    private boolean isloop = false;
+
+    public void setIslooping(boolean islooping) {
+        this.isloop = isloop;
+    }
+
+    public MusicThread(String filename , boolean isloop) {
         //初始化filename
         this.filename = filename;
+        this.isloop = isloop;
         reverseMusic();
     }
 
@@ -84,7 +91,6 @@ public class MusicThread extends Thread {
                     dataLine.write(buffer, 0, numBytesRead);
                 }
             }
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -100,8 +106,10 @@ public class MusicThread extends Thread {
 
     @Override
     public void run() {
-        InputStream stream = new ByteArrayInputStream(samples);
-        play(stream);
+        do{
+            InputStream stream = new ByteArrayInputStream(samples);
+            play(stream);
+        }while (isloop && !stop);
     }
 
 }

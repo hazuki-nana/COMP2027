@@ -124,7 +124,7 @@ public class BaseGame extends JPanel {
                 if (score % 500 < 50 && score % 500 > 0 && score >= 500 && flag) {
                     enemyFactory = new BossFactory();
                     flag = false;
-                    lp.updateIsBoss(true);
+                    lp.updateIsBoss();
                 } else if (enemyAircrafts.size() < enemyMaxNumber) {
                     if (Math.random() < 0.6)
                         enemyFactory = new MobFactory();
@@ -163,8 +163,8 @@ public class BaseGame extends JPanel {
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
-                lp.setGameOverFlag(gameOverFlag);
-                new MusicPlay("game_over");
+                lp.stopMusic();
+                new MusicPlay("game_over", false);
                 Main.displayOver(score, diff);
             }
 
@@ -262,7 +262,7 @@ public class BaseGame extends JPanel {
                     // 敌机损失一定生命值
                     enemyAircraft.decreaseHp(bullet.getPower());
                     bullet.vanish();
-                    new MusicPlay("bullet_hit");
+                    new MusicPlay("bullet_hit", false);
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给, 切换音乐
                         if (enemyAircraft.getClass() == EliteEnemy.class)
@@ -271,7 +271,7 @@ public class BaseGame extends JPanel {
                             score +=20;
                         else if (enemyAircraft instanceof BossEnemy){
                             score +=70;
-                            lp.updateIsBoss(false);
+                            lp.updateIsBoss();
                         }
                         score += 10;
                         supports.addAll(enemyAircraft.Drop());
@@ -292,7 +292,7 @@ public class BaseGame extends JPanel {
             if (heroAircraft.crash(support)){
                 support.Effect(heroAircraft, enemyAircrafts);
                 support.vanish();
-                new MusicPlay("get_supply");
+                new MusicPlay("get_supply", false);
             }
         }
 
