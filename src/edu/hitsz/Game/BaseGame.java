@@ -165,12 +165,7 @@ public class BaseGame extends JPanel {
                 System.out.println("Game Over!");
                 lp.setGameOverFlag(gameOverFlag);
                 new MusicPlay("game_over");
-                try {
-                    Main.cardPanel.add(new Rank(score, this.diff).getMainPanel());
-                    Main.cardLayout.last(Main.cardPanel);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.displayOver(score, diff);
             }
 
         };

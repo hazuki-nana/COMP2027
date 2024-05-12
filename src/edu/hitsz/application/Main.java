@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import edu.hitsz.Graph.Rank;
 import edu.hitsz.Graph.Start;
 
 /**
@@ -17,6 +18,16 @@ public class Main {
 
     public static final CardLayout cardLayout = new CardLayout(0, 0);
     public static final JPanel cardPanel = new JPanel(cardLayout);
+
+    public static void displayOver(int score, String diff){
+        try {
+            cardPanel.add(new Rank(score, diff).getMainPanel());
+            cardLayout.last(cardPanel);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static void main(String[] args) throws IOException {
 
