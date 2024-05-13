@@ -12,11 +12,11 @@ public class MusicPlay {
         return musicThread;
     }
 
-    public MusicPlay(String filename) {
+    public MusicPlay(String filename, boolean isloop) {
         if (Start.isSoundOn){
             this.filename = filename;
             filepath = Folder + filename + ".wav";
-            musicThread = new MusicThread(filepath);
+            musicThread = new MusicThread(filepath, isloop);
             musicThread.start();
         }
     }

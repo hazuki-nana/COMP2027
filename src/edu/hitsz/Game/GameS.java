@@ -1,15 +1,12 @@
 package edu.hitsz.Game;
 
+import edu.hitsz.airFac.BossFactory;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
 import java.awt.*;
 
 public class GameS extends BaseGame{
-    /**
-     * 屏幕中出现的敌机最大数量
-     */
-    private int enemyMaxNumber = 5;
 
     /**
      * 当前得分
@@ -34,8 +31,18 @@ public class GameS extends BaseGame{
     }
 
     @Override
+    public void eliteChange() {
+
+    }
+
+    @Override
+    public void bossChange() {
+
+    }
+
+
+    @Override
     public void paint(Graphics g) {
-        super.paint(g);
 
         // 绘制背景,图片滚动
         g.drawImage(ImageManager.BACKGROUND_IMAGE2, 0, this.backGroundTop - Main.WINDOW_HEIGHT, null);

@@ -19,9 +19,9 @@ public class Direct implements AbstractTrajectory{
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
             if (!isHero)
-                bullet = new EnemyBullet(locationX + (i*2 - shootNum + 1)*10, locationY, speedX, LocspeedY, power);
+                bullet = new EnemyBullet(locationX + (i*2 - shootNum + 1)*20, locationY, speedX, LocspeedY, power);
             else
-                bullet = new HeroBullet(locationX + (i*2 - shootNum + 1)*10, locationY, speedX, LocspeedY, power);
+                bullet = new HeroBullet(locationX + (i*2 - shootNum + 1)*20, locationY, speedX, LocspeedY, power);
             res.add(bullet);
         }
         return res;

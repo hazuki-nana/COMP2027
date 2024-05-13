@@ -16,7 +16,7 @@ public class PlusFactory extends EnemyFactory{
                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
                 3 * direction(),
                 5,
-                40
+                60
         );
     }
 }

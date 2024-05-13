@@ -1,16 +1,12 @@
 package edu.hitsz.Game;
 
+import edu.hitsz.airFac.BossFactory;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
 import java.awt.*;
 
 public class GameN extends BaseGame{
-
-    /**
-     * 屏幕中出现的敌机最大数量
-     */
-    private int enemyMaxNumber = 5;
 
     /**
      * 当前得分
@@ -27,15 +23,28 @@ public class GameN extends BaseGame{
      */
     private int cycleDuration = 600;
     private int cycleTime = 0;
-
+    private double gameAugment = 0.003;
+    private double bossAugment = 0.01;
+    private double bossRate = 1;
     public GameN(){
         super();
         setDiff("Normal");
     }
 
     @Override
+    public void eliteChange() {
+        super.probability -= gameAugment;
+        super.enemyMaxNumber += 1;
+    }
+
+    @Override
+    public void bossChange() {
+        super.enemyFactory = new BossFactory(bossRate);
+        bossRate += bossAugment;
+        System.out.print(" boss血量：" + (500 * (bossRate)));
+    }
+    @Override
     public void paint(Graphics g) {
-        super.paint(g);
 
         // 绘制背景,图片滚动
         g.drawImage(ImageManager.BACKGROUND_IMAGE3, 0, this.backGroundTop - Main.WINDOW_HEIGHT, null);

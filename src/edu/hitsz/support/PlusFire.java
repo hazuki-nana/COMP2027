@@ -10,7 +10,7 @@ public class PlusFire extends AbstractSupport {
     public PlusFire(int locationX, int locationY, int speedX, int speedY) {
         super(locationX, locationY, speedX, speedY);
     }
-    public void Effect(HeroAircraft heroAircraft, List<AbstractEnemy> enemyList){
+    public void Effect(HeroAircraft heroAircraft){
         heroAircraft.increasePlusFire();
     }
 

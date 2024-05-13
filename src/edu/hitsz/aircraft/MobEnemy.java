@@ -35,4 +35,9 @@ public class MobEnemy extends AbstractEnemy {
     }
 
     public List<AbstractSupport> Drop(){return new LinkedList<>();};
+
+    @Override
+    public void update() {
+        this.vanish();
+    }
 }

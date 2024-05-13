@@ -1,5 +1,6 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.basic.Observer;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.propFac.*;
 import edu.hitsz.support.AbstractSupport;
@@ -7,14 +8,19 @@ import edu.hitsz.support.AbstractSupport;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class AbstractEnemy extends AbstractAircraft{
+public abstract class AbstractEnemy extends AbstractAircraft implements Observer {
+
+    boolean isHero = false;
+
+
 
     int score;
-    boolean isHero = false;
     public AbstractEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
     }
-
+    public int getScore() {
+        return score;
+    }
     public List<AbstractSupport> creatDrop(int num){
         int x = this.getLocationX();
         int y = this.getLocationY();
@@ -41,4 +47,5 @@ public abstract class AbstractEnemy extends AbstractAircraft{
     public abstract List<BaseBullet> shoot();
 
     public abstract List<AbstractSupport> Drop();
+
 }

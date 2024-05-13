@@ -14,7 +14,7 @@ public class Heal extends AbstractSupport {
         super(locationX, locationY, speedX, speedY);
         hp = 10;
     }
-    public void Effect(HeroAircraft heroAircraft, List<AbstractEnemy> enemyList){
+    public void Effect(HeroAircraft heroAircraft){
         heroAircraft.increaseHp(hp);
     }
 

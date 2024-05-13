@@ -6,9 +6,14 @@ import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
 public class BossFactory extends EnemyFactory{
+    private double rate = 1;
     private int direction(){
         if(Math.random() < 0.5) return 1;
         else return -1;
+    }
+
+    public BossFactory(double augment){
+        this.rate = rate;
     }
     @Override
     public AbstractEnemy CreatEnemy() {
@@ -17,7 +22,7 @@ public class BossFactory extends EnemyFactory{
                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
                 3 * direction(),
                 0,
-                500
+                (int)(500 * (rate))
         );
     }
 }

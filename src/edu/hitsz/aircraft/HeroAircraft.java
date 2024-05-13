@@ -26,7 +26,7 @@ public class HeroAircraft extends AbstractAircraft {
     /**
      * 子弹伤害
      */
-    private int power = 60;
+    private int power = 30;
 
     /**
      * 子弹射击方向 (向上发射：1，向下发射：-1)
@@ -126,14 +126,7 @@ public class HeroAircraft extends AbstractAircraft {
         setAbstractTrajectory(new Direct());
     }
 
-    /**
-     * 道具：清屏
-     */
-    public void Explode(List<AbstractEnemy> enemyList){
-        System.out.println("Bomb support active!");
-        enemyList.removeIf(enemy -> !(enemy instanceof BossEnemy));
-        new MusicPlay("bomb_explosion");
-    }
+
 
 
     public static HeroAircraft getHeroAircraft() {

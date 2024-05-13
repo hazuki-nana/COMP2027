@@ -1,0 +1,33 @@
+@startuml
+
+interface Obersever{
+    +{abstract}update():void
+}
+
+abstract AbstractEnemy{
+    +{abstract}update();
+}
+
+abstract BaseBullet{
+    +{abstract}update();
+}
+
+
+Obersever <.. AbstractEnemy
+Obersever <.. BaseBullet
+
+class Bomb{
+    -observers:Obersever[]
+    +registerObservers(List<? extend Observer> observers):void
+    +removeObservers(observer):void
+    +notifyAll():void
+    +Effect():void
+}
+
+Bomb o--> Obersever
+
+class BaseGame{}
+
+BaseGame ..> Bomb
+
+@enduml

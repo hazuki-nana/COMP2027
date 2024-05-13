@@ -13,6 +13,6 @@ public abstract class AbstractSupport extends AbstractFlyingObject {
     }
 
 
-    public abstract void Effect(HeroAircraft heroAircraft, List<AbstractEnemy> enemyList);
+    public abstract void Effect(HeroAircraft heroAircraft);
 
 }

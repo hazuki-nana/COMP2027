@@ -69,8 +69,13 @@ public class PlusEnemy extends AbstractEnemy {
                 this.shootNum, this.power, this.getSpeedY() + direction*3, isHero);
     }
 
+
     public List<AbstractSupport> Drop() {
         return creatDrop(1);
     }
 
+    @Override
+    public void update() {
+        this.decreaseHp(20);
+    }
 }

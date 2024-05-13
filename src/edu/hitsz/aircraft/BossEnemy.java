@@ -49,6 +49,7 @@ public class BossEnemy extends AbstractEnemy {
         score = 100;
     }
 
+
     @Override
     public void forward() {
         super.forward();
@@ -65,6 +66,7 @@ public class BossEnemy extends AbstractEnemy {
      */
     public List<BaseBullet> shoot()
     {
+
         return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
                 this.shootNum, this.power, this.getSpeedY(), isHero);
     }
@@ -72,7 +74,11 @@ public class BossEnemy extends AbstractEnemy {
     public List<AbstractSupport> Drop(){
         return creatDrop(3);
     }
-//public List<AbstractSupport> Drop(){ return new ArrayList<>();}
 
+    @Override
+    public void update() {
+
+    }
+//public List<AbstractSupport> Drop(){ return new ArrayList<>();}
 
 }

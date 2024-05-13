@@ -109,10 +109,10 @@ public abstract class AbstractFlyingObject {
         int fWidth = flyingObject.getWidth();
         int fHeight = flyingObject.getHeight();
 
-        return x + (fWidth+this.getWidth())/2 > locationX
-                && x - (fWidth+this.getWidth())/2 < locationX
-                && y + ( fHeight/fFactor+this.getHeight()/factor )/2 > locationY
-                && y - ( fHeight/fFactor+this.getHeight()/factor )/2 < locationY;
+        return x + (fWidth+this.getWidth())/4 > locationX
+                && x - (fWidth+this.getWidth())/4 < locationX
+                && y + ( fHeight/fFactor+this.getHeight()/factor )/4 > locationY
+                && y - ( fHeight/fFactor+this.getHeight()/factor )/4 < locationY;
     }
 
     public int getLocationX() {
