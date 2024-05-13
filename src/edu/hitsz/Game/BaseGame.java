@@ -133,8 +133,16 @@ public class BaseGame extends JPanel {
                     else enemyFactory = new PlusFactory();
                 }
                 enemyAircrafts.add(enemyFactory.CreatEnemy());
-                if (score % 500 > 450 && !flag)
+                if (score % 500 > 450 && !flag) {
                     flag = true;
+                    for (AbstractAircraft enemyAircraft : enemyAircrafts) {
+                        if (enemyAircraft instanceof BossEnemy) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+
                 // 飞机射出子弹
                 shootAction();
             }

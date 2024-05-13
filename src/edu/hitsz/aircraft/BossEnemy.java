@@ -46,6 +46,7 @@ public class BossEnemy extends AbstractEnemy {
     public BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
         setAbstractTrajectory(new Circle());
+        score = 100;
     }
 
     @Override
@@ -64,34 +65,14 @@ public class BossEnemy extends AbstractEnemy {
      */
     public List<BaseBullet> shoot()
     {
-
         return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
                 this.shootNum, this.power, this.getSpeedY(), isHero);
     }
-//    public List<BaseBullet> shoot() {
-//
-//        double a = (double) 360 / shootNum ;
-//        int x = this.getLocationX();
-//        int y = this.getLocationY() + direction * 2;
-//        int[] speedX = new int[shootNum];
-//        int[] speedY = new int[shootNum];
-//        for (int i = 0; i < shootNum; i++) {
-//            double angle = Math.toRadians(a * (i)); // 将角度转换为弧度
-//            speedX[i] = (int) (Math.sin(angle) * 20);
-//            speedY[i] = (int) (Math.cos(angle) * 10);
-//        }
-//        BaseBullet[] bullet = new BaseBullet[shootNum];
-//        for (int i = 0; i < shootNum; i++) {
-//            // 子弹发射位置相对飞机位置向前偏移
-//            // 多个子弹横向分散
-//            bullet[i] = new EnemyBullet(x, y, speedX[i], speedY[i], power);
-//        }
-//        return new LinkedList<>(List.of(bullet));
-//    }
-//    public List<BaseBullet> shoot(){return new LinkedList<>();}
+
     public List<AbstractSupport> Drop(){
         return creatDrop(3);
     }
 //public List<AbstractSupport> Drop(){ return new ArrayList<>();}
+
 
 }

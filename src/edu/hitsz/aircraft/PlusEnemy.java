@@ -45,6 +45,7 @@ public class PlusEnemy extends AbstractEnemy {
     public PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
         setAbstractTrajectory(new Scatter());
+        score = 60;
     }
 
     @Override
@@ -67,22 +68,6 @@ public class PlusEnemy extends AbstractEnemy {
         return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
                 this.shootNum, this.power, this.getSpeedY() + direction*3, isHero);
     }
-//    public List<BaseBullet> shoot() {
-//        double a = 30.0;
-//        int x = this.getLocationX();
-//        int y = this.getLocationY() + direction*2;
-//        int[] speedX = new int [shootNum];
-//        int[] speedY = new int [shootNum];
-//        for (int i = 0; i < shootNum; i++) {
-//            double angle = Math.toRadians(a * (i - 1)); // 将角度转换为弧度
-//            speedX[i] = (int) (Math.sin(angle) * 10);
-//            speedY[i] =  (int) (Math.cos(angle) * 10);
-//        }
-//        BaseBullet[] bullet = new BaseBullet[3];
-//        for(int i=0; i<shootNum; i++)
-//            bullet[i] = new EnemyBullet(x, y, speedX[i], speedY[i], power);
-//        return new LinkedList<>(List.of(bullet));
-//    }
 
     public List<AbstractSupport> Drop() {
         return creatDrop(1);

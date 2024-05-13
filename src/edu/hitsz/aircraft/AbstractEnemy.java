@@ -9,6 +9,7 @@ import java.util.List;
 
 public abstract class AbstractEnemy extends AbstractAircraft{
 
+    int score;
     boolean isHero = false;
     public AbstractEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
