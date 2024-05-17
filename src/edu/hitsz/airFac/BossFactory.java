@@ -12,7 +12,7 @@ public class BossFactory extends EnemyFactory{
         else return -1;
     }
 
-    public BossFactory(double augment){
+    public BossFactory(double rate){
         this.rate = rate;
     }
     @Override

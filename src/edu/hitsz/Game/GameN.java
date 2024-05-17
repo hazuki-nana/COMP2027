@@ -24,7 +24,7 @@ public class GameN extends BaseGame{
     }
 
     @Override
-    public void bossChange() {
+    public void bossChange(int time) {
         super.enemyFactory = new BossFactory(bossRate);
         bossRate += bossAugment;
         System.out.print(" boss血量：" + (500 * (bossRate)));

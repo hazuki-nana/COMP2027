@@ -39,6 +39,7 @@ public class ImageManager {
     public static BufferedImage PLUS_ENEMY_IMAGE;
     public static BufferedImage BOSS_ENEMY_IMAGE;
     public static BufferedImage Battery_ENEMY_IMAGE;
+    public static BufferedImage PBOSS_ENEMY_IMAGE;
     public static BufferedImage MATE_IMAGE;
     public static BufferedImage HEAL_IMAGE;
     public static BufferedImage FIRE_IMAGE;
@@ -60,6 +61,7 @@ public class ImageManager {
             PLUS_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/elitePlus.png"));
             BOSS_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/boss.png"));
             Battery_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/battery.png"));
+            PBOSS_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/pboss.png"));
             MATE_IMAGE = ImageIO.read(new FileInputStream("src/images/mate.png"));
             HERO_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_hero.png"));
             ENEMY_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_enemy.png"));
@@ -75,6 +77,7 @@ public class ImageManager {
             CLASSNAME_IMAGE_MAP.put(PlusEnemy.class.getName(), PLUS_ENEMY_IMAGE);
             CLASSNAME_IMAGE_MAP.put(BossEnemy.class.getName(), BOSS_ENEMY_IMAGE);
             CLASSNAME_IMAGE_MAP.put(Battery.class.getName(), Battery_ENEMY_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(PlusBoss.class.getName(), PBOSS_ENEMY_IMAGE);
             CLASSNAME_IMAGE_MAP.put(Mate.class.getName(), MATE_IMAGE);
             CLASSNAME_IMAGE_MAP.put(HeroBullet.class.getName(), HERO_BULLET_IMAGE);
             CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);

@@ -51,8 +51,11 @@ class HeroAircraft {
     + Explode():void
     + {static}getHero():HeroAircraft
 }
+
+class Mate{}
 HeroAircraft <|-- HeroAircraft
 AbstractAircraft <|-- HeroAircraft
+AbstractAircraft <|-- Mate
 
 abstract class AbstractEnemy
 {
@@ -93,6 +96,9 @@ class EliteEnemy {
 }
 AbstractEnemy <|-- EliteEnemy
 
+class Battery{}
+AbstractEnemy <|-- Battery
+
 class BossEnemy{
     - shootNum:int
     - power:int
@@ -103,6 +109,12 @@ class BossEnemy{
     + drop() :List<AbstractSupport>
 }
 AbstractEnemy <|-- BossEnemy
+
+class PlusBoss{
+
+}
+
+BossEnemy <|-- PlusBoss
 
 abstract class BaseBullet
 {
@@ -153,12 +165,18 @@ class PlusFire
     +plusFire(int locationX, int locationY, int speedX, int speedY)
     +Effect(HeroAircraft heroAircraft):void
 }
+class MateProp{
+    +Effect(HeroAircraft heroAircraft):void
+    +Effect(HeroAircraft heroAircraft, List<AbstractAircraft> mateAircrafts):void
+}
 
 AbstractSupport <|-- Bomb
 AbstractSupport <|-- Fire
 AbstractSupport <|-- Heal
 AbstractSupport <|-- PlusFire
+AbstractSupport <|-- MateProp
 AbstractFlyingObject <|-- AbstractSupport
+
 
 
 @enduml

@@ -40,7 +40,7 @@ public class GameS extends BaseGame{
     }
 
     @Override
-    public void bossChange() {
+    public void bossChange(int time) {
 
     }
 

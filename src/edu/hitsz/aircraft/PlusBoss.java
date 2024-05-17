@@ -18,7 +18,7 @@ import java.util.List;
  * 精英飞机，定时射击子弹
  * @author hitsz
  */
-public class BossEnemy extends AbstractEnemy {
+public class PlusBoss extends BossEnemy {
 
     /**攻击方式 */
 
@@ -43,9 +43,9 @@ public class BossEnemy extends AbstractEnemy {
      * @param speedY 英雄机射出的子弹的基准速度（英雄机无特定速度）
      * @param hp    初始生命值
      */
-    public BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
+    public PlusBoss(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
-        setAbstractTrajectory(new Circle());
+        setAbstractTrajectory(new PlusScatter());
         score = 100;
     }
 

@@ -94,7 +94,7 @@ public abstract class BaseGame extends JPanel {
 
     double probability = 0.6;
 
-    int threShold = 900;
+    int threShold = 500;
 
     int batteryTime = 15000;
 
@@ -186,7 +186,7 @@ public abstract class BaseGame extends JPanel {
 
 
     public abstract void eliteChange();
-    public abstract void bossChange();
+    public abstract void bossChange(int time);
     public abstract void setCycleDuration();
     public abstract void setThreshold();
     public abstract void setBatteryTime();
@@ -237,7 +237,7 @@ public abstract class BaseGame extends JPanel {
             if (score % threShold < threShold / 2 && score % threShold > 0 && score >= threShold && flag && !isSimple()) {
                 flag = false;
                 if (diff.equals("Hard"))
-                    bossChange();
+                    bossChange(time);
                 lp.updateIsBoss();
             } else if (enemyAircrafts.size() < enemyMaxNumber) {
                 if (Math.random() < probability)

@@ -1,6 +1,7 @@
 package edu.hitsz.Game;
 
 import edu.hitsz.airFac.BossFactory;
+import edu.hitsz.airFac.PBossFactory;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
@@ -43,8 +44,11 @@ public class GameH extends BaseGame{
     }
 
     @Override
-    public void bossChange() {
-        super.enemyFactory = new BossFactory(bossRate);
+    public void bossChange(int time) {
+        if (time <= 20000)
+            super.enemyFactory = new BossFactory(bossRate);
+        else
+            super.enemyFactory = new PBossFactory(bossRate);
         bossRate += bossAugment;
         System.out.print(" boss血量：" + (500 * (bossRate)));
     }
