@@ -3,6 +3,7 @@ package edu.hitsz.aircraft;
 import edu.hitsz.BulletTrajectory.Circle;
 import edu.hitsz.BulletTrajectory.Direct;
 import edu.hitsz.BulletTrajectory.Scatter;
+import edu.hitsz.airFac.MateFactory;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 import edu.hitsz.Music.MusicPlay;
@@ -96,6 +97,13 @@ public class HeroAircraft extends AbstractAircraft {
             }
         }).start();
     }
+
+    /**
+     * 道具：召唤友军
+     */
+    public void Summon(List<AbstractAircraft> mateAircrafts){
+        mateAircrafts.add(new MateFactory().creatMate());
+    }
     /**
      * 道具：超级火力增加
      */
@@ -119,7 +127,7 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     /**
-     * 道具：还原
+     * 还原
      */
     private void reverseFire(){
         this.shootNum = 2;

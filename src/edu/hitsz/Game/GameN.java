@@ -8,21 +8,7 @@ import java.awt.*;
 
 public class GameN extends BaseGame{
 
-    /**
-     * 当前得分
-     */
-    private int score = 0;
-    /**
-     * 当前时刻
-     */
-    private int time = 0;
 
-    /**
-     * 周期（ms)
-     * 指示子弹的发射、敌机的产生频率
-     */
-    private int cycleDuration = 600;
-    private int cycleTime = 0;
     private double gameAugment = 0.003;
     private double bossAugment = 0.01;
     private double bossRate = 1;
@@ -63,6 +49,11 @@ public class GameN extends BaseGame{
     }
 
     @Override
+    public void setMateTime() {
+
+    }
+
+    @Override
     public void paint(Graphics g) {
 
         // 绘制背景,图片滚动
@@ -78,7 +69,9 @@ public class GameN extends BaseGame{
         paintImageWithPositionRevised(g, enemyBullets);
         paintImageWithPositionRevised(g, heroBullets);
         paintImageWithPositionRevised(g, supports);
+        paintImageWithPositionRevised(g, divineSupports);
         paintImageWithPositionRevised(g, enemyAircrafts);
+        paintImageWithPositionRevised(g, mateAircrafts);
 
         g.drawImage(ImageManager.HERO_IMAGE, heroAircraft.getLocationX() - ImageManager.HERO_IMAGE.getWidth() / 2,
                 heroAircraft.getLocationY() - ImageManager.HERO_IMAGE.getHeight() / 2, null);

@@ -29,7 +29,7 @@ public class GameH extends BaseGame{
 
     private double gameAugment = 0.006;
     private double bossAugment = 0.03;
-    private double bossRate = 1.2;
+    private double bossRate = 2.5;
 
     public GameH(){
         super();
@@ -70,6 +70,11 @@ public class GameH extends BaseGame{
         }
     }
 
+    @Override
+    public void setMateTime() {
+        super.mateTime *= 2;
+    }
+
 
     @Override
     public void paint(Graphics g) {
@@ -87,7 +92,9 @@ public class GameH extends BaseGame{
         paintImageWithPositionRevised(g, enemyBullets);
         paintImageWithPositionRevised(g, heroBullets);
         paintImageWithPositionRevised(g, supports);
+        paintImageWithPositionRevised(g, divineSupports);
         paintImageWithPositionRevised(g, enemyAircrafts);
+        paintImageWithPositionRevised(g, mateAircrafts);
 
         g.drawImage(ImageManager.HERO_IMAGE, heroAircraft.getLocationX() - ImageManager.HERO_IMAGE.getWidth() / 2,
                 heroAircraft.getLocationY() - ImageManager.HERO_IMAGE.getHeight() / 2, null);

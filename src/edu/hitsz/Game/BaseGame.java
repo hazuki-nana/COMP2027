@@ -10,8 +10,10 @@ import edu.hitsz.application.Main;
 import edu.hitsz.Music.MusicPlay;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
+import edu.hitsz.propFac.MateSupFactory;
 import edu.hitsz.support.AbstractSupport;
 import edu.hitsz.support.Bomb;
+import edu.hitsz.support.MateProp;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import javax.swing.*;
@@ -53,10 +55,14 @@ public abstract class BaseGame extends JPanel {
 
     final HeroAircraft heroAircraft;
     final List<AbstractEnemy> enemyAircrafts;
+    final List<AbstractAircraft> mateAircrafts;
     final List<BaseBullet> heroBullets;
     final List<BaseBullet> enemyBullets;
     final List<AbstractSupport> supports;
+    final List<AbstractSupport> divineSupports;
     EnemyFactory enemyFactory;
+
+
     boolean flag = false;
     /**
      * 屏幕中出现的敌机最大数量
@@ -92,12 +98,16 @@ public abstract class BaseGame extends JPanel {
 
     int batteryTime = 15000;
 
+    int mateTime = 10000;
+
     public BaseGame() {
         heroAircraft = HeroAircraft.getHeroAircraft();
         enemyAircrafts = new LinkedList<>();
+        mateAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
         supports = new LinkedList<>();
+        divineSupports = new LinkedList<>();
 
         /**
          * Scheduled 线程池，用于定时任务调度
@@ -180,6 +190,7 @@ public abstract class BaseGame extends JPanel {
     public abstract void setCycleDuration();
     public abstract void setThreshold();
     public abstract void setBatteryTime();
+    public abstract void setMateTime();
     public boolean isSimple(){
         return false;
     }
@@ -202,8 +213,18 @@ public abstract class BaseGame extends JPanel {
         }
         if (time % batteryTime <= cycleDuration-1 && time % batteryTime >=0){
             setBatteryTime();
-            System.out.println("炮台出现间歇：" + batteryTime);
-            creBattery();
+            System.out.println("炮台出现间隔：" + batteryTime);
+            enemyAircrafts.add(new BatteryFactory().CreatEnemy());
+        }
+        if (time % mateTime <= cycleDuration-1 && time % mateTime >=0){
+            setMateTime();
+            System.out.println("场外援助间隔：" + mateTime);
+            divineSupports.add(new MateSupFactory().CreatSupport(
+                    (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())),
+                    (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
+                    (int) (3 * Math.random()),
+                    3
+            ));
         }
     }
 
@@ -240,10 +261,6 @@ public abstract class BaseGame extends JPanel {
         }
     }
 
-    public void creBattery(){
-        enemyFactory = new BatteryFactory();
-        enemyAircrafts.add(enemyFactory.CreatEnemy());
-    }
 
     private void bossVanish(){
         for (AbstractEnemy enemyAircraft : enemyAircrafts){
@@ -270,6 +287,9 @@ public abstract class BaseGame extends JPanel {
             enemyBullets.addAll(enemyAircraft.shoot());
         // 英雄射击
         heroBullets.addAll(heroAircraft.shoot());
+        for (AbstractAircraft mate : mateAircrafts){
+            heroBullets.addAll(mate.shoot());
+        }
     }
 
     private void bulletsMoveAction() {
@@ -285,11 +305,17 @@ public abstract class BaseGame extends JPanel {
         for (AbstractSupport support : supports) {
             support.forward();
         }
+        for (AbstractSupport support : divineSupports) {
+            support.forward();
+        }
     }
 
     private void aircraftsMoveAction() {
         for (AbstractAircraft enemyAircraft : enemyAircrafts) {
             enemyAircraft.forward();
+        }
+        for (AbstractAircraft mate : mateAircrafts){
+            mate.forward();
         }
     }
 
@@ -362,6 +388,15 @@ public abstract class BaseGame extends JPanel {
                 support.vanish();
             }
         }
+        for (AbstractSupport support : divineSupports){
+            if (support.notValid())
+                continue;
+            if (heroAircraft.crash(support)){
+                ((MateProp)support).Effect(heroAircraft, mateAircrafts);
+                new MusicPlay("get_supply", false);
+                support.vanish();
+            }
+        }
 
     }
 
@@ -377,6 +412,7 @@ public abstract class BaseGame extends JPanel {
         heroBullets.removeIf(AbstractFlyingObject::notValid);
         enemyAircrafts.removeIf(AbstractFlyingObject::notValid);
         supports.removeIf(AbstractFlyingObject::notValid);
+        divineSupports.removeIf(AbstractFlyingObject::notValid);
     }
 
 

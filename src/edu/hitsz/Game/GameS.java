@@ -59,6 +59,11 @@ public class GameS extends BaseGame{
 
     }
 
+    @Override
+    public void setMateTime() {
+
+    }
+
 
     @Override
     public void paint(Graphics g) {
