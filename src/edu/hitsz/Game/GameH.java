@@ -49,6 +49,20 @@ public class GameH extends BaseGame{
         System.out.print(" boss血量：" + (500 * (bossRate)));
     }
 
+    @Override
+    public void setCycleDuration() {
+        if (super.cycleDuration >= 400){
+            super.cycleDuration -= 50;
+        }
+    }
+
+    @Override
+    public void setThreshold() {
+        if (super.cycleDuration >= 400){
+            super.threShold -= 50;
+        }
+    }
+
 
     @Override
     public void paint(Graphics g) {

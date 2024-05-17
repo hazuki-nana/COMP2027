@@ -31,12 +31,26 @@ public class GameS extends BaseGame{
     }
 
     @Override
+    public boolean isSimple(){
+        return true;
+    }
+    @Override
     public void eliteChange() {
 
     }
 
     @Override
     public void bossChange() {
+
+    }
+
+    @Override
+    public void setCycleDuration() {
+
+    }
+
+    @Override
+    public void setThreshold() {
 
     }
 

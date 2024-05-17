@@ -16,7 +16,7 @@ public class Scatter implements AbstractTrajectory{
         int[] speedY = new int [shootNum];
         for (int i = 0; i < shootNum; i++) {
             double angle = Math.toRadians(a * (i - shootNum / 2)); // 将角度转换为弧度
-            speedX[i] = (int) (Math.sin(angle) * 10);
+            speedX[i] = (int) (Math.sin(angle) * 5);
             speedY[i] =  (int) (Math.cos(angle) * 10);
         }
         BaseBullet[] bullet = new BaseBullet[shootNum];

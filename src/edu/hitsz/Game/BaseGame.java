@@ -76,7 +76,7 @@ public abstract class BaseGame extends JPanel {
      * 周期（ms)
      * 指示子弹的发射、敌机的产生频率
      */
-    private int cycleDuration = 600;
+    int cycleDuration = 1000;
     private int cycleTime = 0;
 
     /**
@@ -87,6 +87,8 @@ public abstract class BaseGame extends JPanel {
     private LoopPlay lp;
 
     double probability = 0.6;
+
+    int threShold = 900;
 
     public BaseGame() {
         heroAircraft = HeroAircraft.getHeroAircraft();
@@ -173,20 +175,40 @@ public abstract class BaseGame extends JPanel {
 
     public abstract void eliteChange();
     public abstract void bossChange();
+    public abstract void setCycleDuration();
+    public abstract void setThreshold();
+    public boolean isSimple(){
+        return false;
+    }
+
+    public void diffVariety(){
+        if (time % 15000 <= cycleDuration-1 && time % 15000 >=0)
+        {
+            eliteChange();
+            System.out.println("精英机出现概率：" + (1 - probability));
+            System.out.println("最大敌机数量：" + enemyMaxNumber);
+        }
+        if (time % 10000 <= cycleDuration-1 && time % 10000 >=0 && !diff.equals("Simple"))
+        {
+            setCycleDuration();
+            System.out.println("刷新周期：" + cycleDuration);
+        }
+        if (time % 50000 <= cycleDuration-1 && time % 50000 >=0){
+            setThreshold();
+            System.out.println("boss阈值：" + threShold);
+        }
+    }
 
     private void enemyAppear(){
         if (timeCountAndNewCycleJudge()) {
             System.out.println(time);
-            if (time % 6000 <= 500 && time % 6000 >=0 && !diff.equals("Simple"))
-            {
-                eliteChange();
-                System.out.println("精英机出现概率：" + (1 - probability));
-                System.out.println("最大敌机数量：" + enemyMaxNumber);
-            }
             // 新敌机产生
-            if (score % 500 < 350 && score % 500 > 0 && score >= 500 && flag && !diff.equals("Simple")) {
+            if(!isSimple())
+                diffVariety();
+            if (score % threShold < threShold / 2 && score % threShold > 0 && score >= threShold && flag && !isSimple()) {
                 flag = false;
-                bossChange();
+                if (diff.equals("Hard"))
+                    bossChange();
                 lp.updateIsBoss();
             } else if (enemyAircrafts.size() < enemyMaxNumber) {
                 if (Math.random() < probability)
@@ -196,7 +218,7 @@ public abstract class BaseGame extends JPanel {
                 else enemyFactory = new PlusFactory();
             }
             enemyAircrafts.add(enemyFactory.CreatEnemy());
-            if (score % 500 > 350 && !flag) {
+            if (score % threShold > threShold / 2 && !flag) {
                 flag = true;
                 for (AbstractAircraft enemyAircraft : enemyAircrafts) {
                     if (enemyAircraft instanceof BossEnemy) {
