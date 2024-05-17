@@ -63,6 +63,13 @@ public class GameH extends BaseGame{
         }
     }
 
+    @Override
+    public void setBatteryTime() {
+        if (super.batteryTime >= 800){
+            super.batteryTime -= 80;
+        }
+    }
+
 
     @Override
     public void paint(Graphics g) {

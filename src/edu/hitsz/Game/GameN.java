@@ -58,6 +58,11 @@ public class GameN extends BaseGame{
     }
 
     @Override
+    public void setBatteryTime() {
+
+    }
+
+    @Override
     public void paint(Graphics g) {
 
         // 绘制背景,图片滚动

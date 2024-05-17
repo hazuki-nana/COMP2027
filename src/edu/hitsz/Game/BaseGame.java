@@ -90,6 +90,8 @@ public abstract class BaseGame extends JPanel {
 
     int threShold = 900;
 
+    int batteryTime = 15000;
+
     public BaseGame() {
         heroAircraft = HeroAircraft.getHeroAircraft();
         enemyAircrafts = new LinkedList<>();
@@ -177,6 +179,7 @@ public abstract class BaseGame extends JPanel {
     public abstract void bossChange();
     public abstract void setCycleDuration();
     public abstract void setThreshold();
+    public abstract void setBatteryTime();
     public boolean isSimple(){
         return false;
     }
@@ -196,6 +199,11 @@ public abstract class BaseGame extends JPanel {
         if (time % 50000 <= cycleDuration-1 && time % 50000 >=0){
             setThreshold();
             System.out.println("boss阈值：" + threShold);
+        }
+        if (time % batteryTime <= cycleDuration-1 && time % batteryTime >=0){
+            setBatteryTime();
+            System.out.println("炮台出现间歇：" + batteryTime);
+            creBattery();
         }
     }
 
@@ -230,6 +238,11 @@ public abstract class BaseGame extends JPanel {
             // 飞机射出子弹
             shootAction();
         }
+    }
+
+    public void creBattery(){
+        enemyFactory = new BatteryFactory();
+        enemyAircrafts.add(enemyFactory.CreatEnemy());
     }
 
     private void bossVanish(){

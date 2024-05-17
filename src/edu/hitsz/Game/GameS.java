@@ -54,6 +54,11 @@ public class GameS extends BaseGame{
 
     }
 
+    @Override
+    public void setBatteryTime() {
+
+    }
+
 
     @Override
     public void paint(Graphics g) {

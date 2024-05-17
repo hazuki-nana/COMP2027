@@ -35,7 +35,6 @@ public class BossEnemy extends AbstractEnemy {
      * 子弹射击方向 (向上发射：1，向下发射：-1)
      */
     private int direction = 1;
-    private boolean isHero = false;
     /**
      * @param locationX 英雄机位置x坐标
      * @param locationY 英雄机位置y坐标
@@ -66,7 +65,6 @@ public class BossEnemy extends AbstractEnemy {
      */
     public List<BaseBullet> shoot()
     {
-
         return executeShoot(this.getLocationX(), this.getLocationY() + direction * 2,
                 this.shootNum, this.power, this.getSpeedY(), isHero);
     }
