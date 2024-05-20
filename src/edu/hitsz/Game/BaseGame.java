@@ -202,7 +202,7 @@ public abstract class BaseGame extends JPanel {
             System.out.println("精英机出现概率：" + (1 - probability));
             System.out.println("最大敌机数量：" + enemyMaxNumber);
         }
-        if (time % 10000 <= cycleDuration-1 && time % 10000 >=0 && !diff.equals("Simple"))
+        if (time % 10000 <= cycleDuration-1 && time % 10000 >=0 )
         {
             setCycleDuration();
             System.out.println("刷新周期：" + cycleDuration);
@@ -220,7 +220,7 @@ public abstract class BaseGame extends JPanel {
             setMateTime();
             System.out.println("场外援助间隔：" + mateTime);
             divineSupports.add(new MateSupFactory().CreatSupport(
-                    (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())),
+                    (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.MATE_IMAGE.getWidth())),
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
                     (int) (3 * Math.random()),
                     3

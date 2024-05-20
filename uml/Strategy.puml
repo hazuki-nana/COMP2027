@@ -20,9 +20,15 @@ class Direct
 {
     +shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
 }
+
+class PlusScatter
+{
+    +shoot(int locationX, int locationY, int shootNum, int power, int LocspeedY, boolean isHero):List<BaseBullet>
+}
 AbstractTrajectory <|.. Circle
 AbstractTrajectory <|.. Scatter
 AbstractTrajectory <|.. Direct
+Scatter <|-- PlusScatter
 
 abstract class AbstractAircraft
 {
@@ -42,4 +48,6 @@ MobEnemy --|> AbstractAircraft
 BossEnemy --|> AbstractAircraft
 EliteEnemy --|> AbstractAircraft
 PlusEnemy --|> AbstractAircraft
+PlusBoss --|> AbstractAircraft
+Mate --|> AbstractAircraft
 @enduml

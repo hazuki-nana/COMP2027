@@ -1,0 +1,81 @@
+ @startuml
+'https://plantuml.com/sequence-diagram
+
+class MobEnemy {
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractEnemy <|-- MobEnemy
+
+class PlusEnemy{
+    + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractEnemy <|-- PlusEnemy
+
+class EliteEnemy {
+    - shootNum:int
+    - power:int
+    - direction:int
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+}
+AbstractEnemy <|-- EliteEnemy
+
+class BossEnemy{
+    + PlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + drop() :List<AbstractSupport>
+}
+AbstractEnemy <|-- BossEnemy
+
+class PlusBoss{
+
+}
+
+abstract class AbstractEnemy
+{
+}
+
+abstract class EnemyFactory {
+    +{abstract}CreatEnemy():AbstractEnemy;
+}
+class EliteFactory {
+    +CreatEnemy():AbstractEnemy;
+}
+class MobFactory {
+    +CreatEnemy():AbstractEnemy;
+}
+class PlusFactory{
+    -direction():int
+    +CreatEnemy():AbstractEnemy;
+}
+class BossFactory{
+    -direction():int
+    +CreatEnemy():AbstractEnemy;
+}
+class PBossFactory{}
+MobEnemy <.. MobFactory
+EliteEnemy <.. EliteFactory
+PlusEnemy <.. PlusFactory
+BossEnemy <.. BossFactory
+PlusBoss <.. PBossFactory
+EnemyFactory <|-- EliteFactory
+EnemyFactory <|-- MobFactory
+EnemyFactory <|-- PlusFactory
+EnemyFactory <|-- PBossFactory
+EnemyFactory <|-- BossFactory
+
+
+
+
+class game{}
+game --> AbstractEnemy
+game --> EnemyFactory
+@enduml

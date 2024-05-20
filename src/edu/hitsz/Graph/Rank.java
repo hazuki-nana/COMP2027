@@ -1,5 +1,6 @@
 package edu.hitsz.Graph;
 
+import edu.hitsz.DAO.DAO;
 import edu.hitsz.DAO.DaoImpl;
 import edu.hitsz.DAO.Player;
 
@@ -23,7 +24,7 @@ public class Rank {
     private JButton Delete;
     private JScrollPane rankScroll;
 
-    private final DaoImpl dao;
+    private final DAO dao;
 
     private ArrayList<String[]> InnData = new ArrayList<>();
     public Rank(int score, String diff) throws IOException {

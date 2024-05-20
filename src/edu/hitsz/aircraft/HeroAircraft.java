@@ -87,7 +87,7 @@ public class HeroAircraft extends AbstractAircraft {
         new Thread(new Runnable () {
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

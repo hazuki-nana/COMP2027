@@ -1,5 +1,57 @@
 @startuml
 abstract BaseGame{
-    +
+    +{abstract}eliteChange():void
+    +{abstract}bossChange():void
+    +{abstract}bossChange():void
+    +{abstract}setCycleDuration():void
+    +{abstract}setThreshold():void
+    +{abstract}setBatteryTime():void
+    +{abstract}setMateTime():void
+    +{abstract}paint():void
+    +isSimple():boolean
+    +diffVariety():void
+    +enemyAppear():void
+    +action():void
 }
+
+class GameSimple{
+    +eliteChange():void
+    +bossChange():void
+    +bossChange():void
+    +setCycleDuration():void
+    +setThreshold():void
+    +setBatteryTime():void
+    +setMateTime():void
+    +paint():void
+    +isSimple():boolean
+}
+
+class GameNormal{
+    +eliteChange():void
+    +bossChange():void
+    +bossChange():void
+    +setCycleDuration():void
+    +setThreshold():void
+    +setBatteryTime():void
+    +setMateTime():void
+    +paint():void
+}
+
+class GameHard{
+    +eliteChange():void
+    +bossChange():void
+    +bossChange():void
+    +setCycleDuration():void
+    +setThreshold():void
+    +setBatteryTime():void
+    +setMateTime():void
+    +paint():void
+}
+
+BaseGame <|-- GameSimple
+BaseGame <|-- GameNormal
+BaseGame <|-- GameHard
+
+
+GameChoosing ..> BaseGame
 @enduml

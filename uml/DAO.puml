@@ -2,11 +2,11 @@
 'https://plantuml.com/sequence-diagram
 
 interface DAO {
-    +List<Player> getAllScores() throws IOException:void
-    +List<Player> getScore(String username) throws IOException:void
-    +addScore(Player player) throws IOException:void
-    +updateScore(Player player):void
-    +deleteScore(int id):void
+    +{abstract}getAllScores():void
+    +{abstract}getScore(String username):void
+    +{abstract}addScore(Player player):void
+    +{abstract}updateScore(Player player):void
+    +{abstract}deleteScore(int id):void
 }
 
 class DaoImpl{
