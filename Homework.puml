@@ -1,0 +1,50 @@
+@startuml
+!define RECTANGLE class
+!define NOTE note
+!define ACTIVITY activity
+
+actor A
+actor B
+RECTANGLE Server
+RECTANGLE "Server Thread A" as ThreadA
+RECTANGLE "Server Thread B" as ThreadB
+
+A -> Server : 1.连接服务器
+Server -> ThreadA : 2.create
+ThreadA -> Server : 4.update
+B -> Server : 5.连接服务器
+Server -> ThreadB : 6.create
+ThreadB -> Server : 8.update
+
+ThreadA -> A : 9.start
+A -> ThreadA : 10.score
+ThreadA -> A : 12.Score B
+
+ThreadB -> B : 9.start
+B -> ThreadB : 10.score
+ThreadB -> B : 12.Score A
+
+A -> ThreadA : 13.dead
+ThreadA -> A : 14.Score B
+A -> ThreadA : 16.close
+
+B -> ThreadB : 15.dead
+ThreadB -> B : 16.close
+
+note right of Server
+    玩家列表：
+    - 玩家A
+    - 玩家B
+end note
+
+note right of ThreadA
+    11. 更新A分数
+    获取B分数
+end note
+
+note right of ThreadB
+    11. 更新B分数
+    获取A分数
+end note
+
+@enduml
